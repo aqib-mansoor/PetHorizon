@@ -204,7 +204,7 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="py-14 sm:py-28 bg-[#060e0a] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS blobs */}
@@ -225,10 +225,10 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mt-6 mb-5"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mt-6 mb-5"
           >
             How It{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
               Works
             </span>
           </motion.h2>
@@ -237,7 +237,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-emerald-100/60 text-lg"
+            className="text-gray-600 text-lg"
           >
             Start organizing your pet family's routines in 5 powerful steps.
           </motion.p>
@@ -321,11 +321,9 @@ function StepCard({
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         className="flex-1 relative rounded-3xl overflow-hidden cursor-pointer"
         style={{
-          background: isActive
-            ? `linear-gradient(135deg, ${item.color}18 0%, rgba(10,18,14,0.95) 100%)`
-            : 'rgba(255,255,255,0.03)',
-          border: `1px solid ${isActive ? item.color + '50' : 'rgba(255,255,255,0.08)'}`,
-          boxShadow: isActive ? `0 0 50px -10px ${item.color}60` : 'none',
+          background: '#ffffff',
+          borderColor: isActive ? 'rgba(16,185,129,0.35)' : 'rgba(243,244,246,1)',
+          boxShadow: isActive ? '0 10px 30px rgba(16,185,129,0.06)' : '0 1px 3px rgba(0,0,0,0.02)',
           transition: 'all 0.4s ease',
         }}
       >
@@ -352,9 +350,9 @@ function StepCard({
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-400"
             style={{
-              backgroundColor: isActive ? `${item.color}25` : `${item.color}12`,
-              border: `1px solid ${item.color}${isActive ? '50' : '25'}`,
-              boxShadow: isActive ? `0 0 25px ${item.color}40` : 'none',
+              backgroundColor: isActive ? `${item.color}20` : `${item.color}08`,
+              border: `1px solid ${item.color}${isActive ? '45' : '18'}`,
+              boxShadow: isActive ? `0 0 15px ${item.color}25` : 'none',
             }}
           >
             <IconComp className="w-7 h-7 transition-all duration-300" style={{ color: item.color }} />
@@ -366,8 +364,8 @@ function StepCard({
                 className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border"
                 style={{
                   color: item.color,
-                  backgroundColor: `${item.color}15`,
-                  borderColor: `${item.color}30`,
+                  backgroundColor: `${item.color}12`,
+                  borderColor: `${item.color}25`,
                 }}
               >
                 {item.step}
@@ -376,7 +374,7 @@ function StepCard({
                 <motion.span
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-[9px] font-bold uppercase tracking-wider text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full"
+                  className="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full"
                 >
                   ● Active
                 </motion.span>
@@ -384,18 +382,18 @@ function StepCard({
             </div>
             <h3
               className="text-xl md:text-2xl font-black mb-3 transition-colors duration-300"
-              style={{ color: isActive ? item.color : 'white' }}
+              style={{ color: isActive ? item.color : '#1f2937' }}
             >
               {item.title}
             </h3>
-            <p className="text-emerald-100/55 leading-relaxed text-sm md:text-base">
+            <p className="text-gray-500 leading-relaxed text-sm md:text-base">
               {item.description}
             </p>
           </div>
 
           <div
             className="hidden lg:block text-[120px] font-black leading-none flex-shrink-0 transition-all duration-400 select-none"
-            style={{ color: item.color, opacity: isActive ? 0.07 : 0.03 }}
+            style={{ color: item.color, opacity: isActive ? 0.09 : 0.04 }}
           >
             {item.number}
           </div>

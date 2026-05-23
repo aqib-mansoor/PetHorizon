@@ -123,7 +123,7 @@ export default function CTA() {
   return (
     <section
       ref={sectionRef}
-      className="py-12 sm:py-24 bg-[#040806] relative overflow-hidden"
+      className="py-12 sm:py-24 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <CTABackground containerRef={sectionRef} />
@@ -141,9 +141,9 @@ export default function CTA() {
           transition={{ duration: 0.8, type: 'spring', damping: 20 }}
           className="relative rounded-[2.5rem] overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(4,8,6,0.95) 40%, rgba(52,211,153,0.06) 100%)',
-            border: '1px solid rgba(16,185,129,0.3)',
-            boxShadow: '0 0 80px rgba(16,185,129,0.15), inset 0 0 60px rgba(16,185,129,0.03)',
+            background: 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #e6fcf5 100%)',
+            border: '1px solid rgba(16,185,129,0.25)',
+            boxShadow: '0 20px 40px rgba(16,185,129,0.05), inset 0 0 60px rgba(16,185,129,0.02)',
           }}
         >
           {/* Top shimmer */}
@@ -155,8 +155,8 @@ export default function CTA() {
           />
 
           {/* Corner glows */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-teal-500/10 rounded-full blur-[60px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-teal-500/5 rounded-full blur-[60px] pointer-events-none" />
 
           {/* Floating paw prints */}
           <motion.div
@@ -164,14 +164,14 @@ export default function CTA() {
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute top-8 left-16 pointer-events-none hidden md:block"
           >
-            <PawPrint className="w-16 h-16 text-emerald-500/10" />
+            <PawPrint className="w-16 h-16 text-emerald-500/5" />
           </motion.div>
           <motion.div
             animate={{ y: [0, -10, 0], rotate: [-45, -38, -45] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
             className="absolute bottom-8 right-20 pointer-events-none hidden md:block"
           >
-            <PawPrint className="w-12 h-12 text-emerald-500/10" />
+            <PawPrint className="w-12 h-12 text-emerald-500/5" />
           </motion.div>
 
           {/* Content */}
@@ -186,25 +186,25 @@ export default function CTA() {
               <div
                 className="flex items-center gap-2 px-4 py-2 rounded-full"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(52,211,153,0.15))',
-                  border: '1px solid rgba(16,185,129,0.4)',
-                  boxShadow: '0 0 20px rgba(16,185,129,0.3)',
+                  background: 'linear-gradient(135deg, rgba(16,185,129,0.12), rgba(52,211,153,0.06))',
+                  border: '1px solid rgba(16,185,129,0.25)',
+                  boxShadow: '0 4px 10px rgba(16,185,129,0.05)',
                 }}
               >
-                <Sparkles className="w-4 h-4 text-emerald-300 fill-emerald-300" />
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">Start Today</span>
+                <Sparkles className="w-4 h-4 text-emerald-500 fill-emerald-500" />
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">Start Today</span>
               </div>
             </motion.div>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-white">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-gray-900">
               Ready to simplify your{' '}
               <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600">
                 pet care experience?
               </span>
             </h2>
 
-            <p className="text-emerald-100/60 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl">
+            <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl">
               Start managing your pets smarter with Pet Horizon today 🐾
             </p>
 
@@ -216,7 +216,7 @@ export default function CTA() {
                 className="relative overflow-hidden font-black px-10 py-4 rounded-2xl text-white cursor-pointer flex items-center justify-center gap-2 group"
                 style={{
                   background: 'linear-gradient(135deg, #10b981, #34d399)',
-                  boxShadow: '0 0 30px rgba(16,185,129,0.5)',
+                  boxShadow: '0 4px 20px rgba(16,185,129,0.4)',
                 }}
               >
                 <Zap className="w-4 h-4" />
@@ -230,18 +230,21 @@ export default function CTA() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 href="#pricing"
-                className="font-bold px-10 py-4 rounded-2xl text-white cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
+                className="font-bold px-10 py-4 rounded-2xl cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm transition-all duration-300"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: '#ffffff',
+                  border: '1px solid rgba(209,213,219,1)',
+                  color: '#374151',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(16,185,129,0.5)';
-                  e.currentTarget.style.background = 'rgba(16,185,129,0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(16,185,129,0.45)';
+                  e.currentTarget.style.background = 'rgba(16,185,129,0.06)';
+                  e.currentTarget.style.color = '#059669';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(209,213,219,1)';
+                  e.currentTarget.style.background = '#ffffff';
+                  e.currentTarget.style.color = '#374151';
                 }}
               >
                 Join Premium

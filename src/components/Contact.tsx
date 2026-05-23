@@ -140,7 +140,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-14 sm:py-28 bg-[#050b08] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <ContactBackground containerRef={sectionRef} />

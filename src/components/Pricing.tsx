@@ -213,7 +213,7 @@ export default function Pricing() {
     <section
       ref={sectionRef}
       id="pricing"
-      className="py-14 sm:py-28 bg-[#080d0b] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS glows */}
@@ -221,7 +221,6 @@ export default function Pricing() {
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-600/8 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
-
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -234,10 +233,10 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mt-6 mb-4"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mt-6 mb-4"
           >
             Simple,{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600">
               Transparent
             </span>{' '}
             Pricing
@@ -247,7 +246,7 @@ export default function Pricing() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-emerald-100/60 text-lg mb-10"
+            className="text-gray-600 text-lg mb-10"
           >
             Choose the perfect companion plan for your pet family.
           </motion.p>
@@ -258,14 +257,14 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="flex items-center justify-center gap-4 p-1.5 bg-white/5 border border-white/10 rounded-2xl w-fit mx-auto backdrop-blur-md"
+            className="flex items-center justify-center gap-4 p-1.5 bg-gray-100 border border-gray-200/80 rounded-2xl w-fit mx-auto"
           >
             <button
               onClick={() => setIsYearly(false)}
               className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                 !isYearly
-                  ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]'
-                  : 'text-emerald-100/50 hover:text-white'
+                  ? 'bg-emerald-500 text-white shadow-[0_4px_15px_rgba(16,185,129,0.3)]'
+                  : 'text-gray-500 hover:text-gray-800'
               }`}
             >
               Monthly
@@ -274,12 +273,12 @@ export default function Pricing() {
               onClick={() => setIsYearly(true)}
               className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                 isYearly
-                  ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]'
-                  : 'text-emerald-100/50 hover:text-white'
+                  ? 'bg-emerald-500 text-white shadow-[0_4px_15px_rgba(16,185,129,0.3)]'
+                  : 'text-gray-500 hover:text-gray-800'
               }`}
             >
               Yearly
-              <span className="text-[10px] bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 px-1.5 py-0.5 rounded-full">
+              <span className="text-[10px] bg-emerald-100 border border-emerald-200 text-emerald-700 px-1.5 py-0.5 rounded-full">
                 -17%
               </span>
             </button>
@@ -300,11 +299,9 @@ export default function Pricing() {
             onHoverEnd={() => setHoveredPlan(null)}
             className="relative rounded-3xl overflow-hidden cursor-pointer"
             style={{
-              background: hoveredPlan === 'free'
-                ? 'linear-gradient(135deg, rgba(110,231,183,0.08) 0%, rgba(0,0,0,0.6) 100%)'
-                : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${hoveredPlan === 'free' ? 'rgba(110,231,183,0.35)' : 'rgba(255,255,255,0.08)'}`,
-              boxShadow: hoveredPlan === 'free' ? '0 0 60px rgba(110,231,183,0.15)' : 'none',
+              background: '#ffffff',
+              border: `1px solid ${hoveredPlan === 'free' ? 'rgba(16,185,129,0.35)' : 'rgba(229,231,235,0.8)'}`,
+              boxShadow: hoveredPlan === 'free' ? '0 10px 30px rgba(16,185,129,0.06)' : '0 1px 3px rgba(0,0,0,0.02)',
               transition: 'all 0.4s ease',
             }}
           >
@@ -316,17 +313,17 @@ export default function Pricing() {
                 <CSSCrystal isPremium={false} />
                 <div className="pt-3">
                   <div className="flex items-center gap-2 mb-2">
-                    <Shield className="w-4 h-4 text-teal-400" />
-                    <span className="text-teal-400 text-xs font-bold uppercase tracking-widest">Free Forever</span>
+                    <Shield className="w-4 h-4 text-emerald-600" />
+                    <span className="text-emerald-600 text-xs font-bold uppercase tracking-widest">Free Forever</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-1">Free Plan</h3>
-                  <p className="text-emerald-100/50 text-sm">Essential pet care tools</p>
+                  <h3 className="text-2xl font-black text-gray-900 mb-1">Free Plan</h3>
+                  <p className="text-gray-500 text-sm">Essential pet care tools</p>
                 </div>
               </div>
 
               <div className="flex items-baseline gap-2 mb-8 pl-1">
-                <span className="text-6xl font-black text-white">$0</span>
-                <span className="text-emerald-100/40 text-sm">/month</span>
+                <span className="text-6xl font-black text-gray-900">$0</span>
+                <span className="text-gray-500 text-sm">/month</span>
               </div>
 
               <ul className="space-y-3.5 mb-8">
@@ -337,10 +334,10 @@ export default function Pricing() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.05 * i }}
-                    className="flex items-center gap-3 text-emerald-100/70 text-sm"
+                    className="flex items-center gap-3 text-gray-600 text-sm"
                   >
-                    <div className="w-5 h-5 rounded-full border border-teal-400/40 bg-teal-400/10 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-teal-400" />
+                    <div className="w-5 h-5 rounded-full border border-emerald-500/30 bg-emerald-500/8 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-emerald-600" />
                     </div>
                     <span>{feat}</span>
                   </motion.li>
@@ -349,7 +346,7 @@ export default function Pricing() {
 
               <button
                 onClick={() => alert('Welcome to Pet Horizon Free!')}
-                className="w-full py-4 rounded-2xl font-bold text-sm border border-white/15 hover:border-teal-400/50 text-white hover:text-teal-300 bg-white/5 hover:bg-teal-400/10 transition-all duration-300 cursor-pointer"
+                className="w-full py-4 rounded-2xl font-bold text-sm border border-gray-200 hover:border-emerald-500 text-gray-700 hover:text-emerald-700 bg-gray-50 hover:bg-emerald-50 transition-all duration-300 cursor-pointer"
               >
                 Get Started Free
               </button>
@@ -367,12 +364,12 @@ export default function Pricing() {
             onHoverEnd={() => setHoveredPlan(null)}
             className="relative rounded-3xl overflow-hidden cursor-pointer"
             style={{
-              background: 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(0,0,0,0.85) 60%, rgba(52,211,153,0.05) 100%)',
-              border: '1px solid rgba(16,185,129,0.4)',
+              background: 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #e6fcf5 100%)',
+              border: '1px solid rgba(16,185,129,0.45)',
               boxShadow: hoveredPlan === 'premium'
-                ? '0 0 80px rgba(16,185,129,0.3), inset 0 0 60px rgba(16,185,129,0.05)'
-                : '0 0 40px rgba(16,185,129,0.15)',
-              transition: 'box-shadow 0.4s ease',
+                ? '0 15px 35px rgba(16,185,129,0.12), inset 0 0 60px rgba(16,185,129,0.02)'
+                : '0 8px 20px rgba(16,185,129,0.06)',
+              transition: 'all 0.4s ease',
             }}
           >
             <div
@@ -385,14 +382,14 @@ export default function Pricing() {
 
             <div
               className="absolute top-0 right-0 w-72 h-72 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(16,185,129,0.2) 0%, transparent 70%)' }}
+              style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(16,185,129,0.15) 0%, transparent 70%)' }}
             />
 
             <div className="absolute top-5 right-5">
               <motion.div
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.6)] uppercase tracking-wider"
+                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full shadow-[0_4px_15px_rgba(16,185,129,0.35)] uppercase tracking-wider"
               >
                 <Star className="w-3 h-3 fill-white" />
                 Most Popular
@@ -404,11 +401,11 @@ export default function Pricing() {
                 <CSSCrystal isPremium={true} />
                 <div className="pt-3">
                   <div className="flex items-center gap-2 mb-2">
-                    <Zap className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest">Premium Access</span>
+                    <Zap className="w-4 h-4 text-emerald-600" />
+                    <span className="text-emerald-600 text-xs font-bold uppercase tracking-widest">Premium Access</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-1">Premium Plan</h3>
-                  <p className="text-emerald-100/60 text-sm">Unlimited smart care</p>
+                  <h3 className="text-2xl font-black text-gray-900 mb-1">Premium Plan</h3>
+                  <p className="text-gray-500 text-sm">Unlimited smart care</p>
                 </div>
               </div>
 
@@ -419,17 +416,17 @@ export default function Pricing() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300"
+                    className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
                   >
                     {isYearly ? '$4.16' : '$4.99'}
                   </motion.span>
                 </AnimatePresence>
                 <div>
-                  <div className="text-emerald-100/50 text-sm">/month</div>
-                  {isYearly && <div className="text-emerald-400 text-xs font-bold">billed yearly</div>}
+                  <div className="text-gray-500 text-sm">/month</div>
+                  {isYearly && <div className="text-emerald-600 text-xs font-bold">billed yearly</div>}
                 </div>
               </div>
-              {isYearly && <p className="text-emerald-400/80 text-xs mb-6 pl-1">Save $10.36 per year vs monthly</p>}
+              {isYearly && <p className="text-emerald-600/80 text-xs mb-6 pl-1">Save $10.36 per year vs monthly</p>}
               {!isYearly && <div className="mb-6" />}
 
               <ul className="space-y-3.5 mb-8">
@@ -440,12 +437,12 @@ export default function Pricing() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.05 * i }}
-                    className="flex items-center gap-3 text-white text-sm"
+                    className="flex items-center gap-3 text-gray-700 text-sm"
                   >
-                    <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                    <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 shadow-[0_2px_8px_rgba(16,185,129,0.3)]">
                       <Check className="w-3 h-3 text-white" />
                     </div>
-                    <span className="font-medium text-emerald-50">{feat}</span>
+                    <span className="font-semibold text-gray-800">{feat}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -457,7 +454,7 @@ export default function Pricing() {
                 className="w-full py-4 rounded-2xl font-black text-white cursor-pointer relative overflow-hidden group"
                 style={{
                   background: 'linear-gradient(135deg, #10b981, #34d399)',
-                  boxShadow: '0 0 30px rgba(16,185,129,0.5)',
+                  boxShadow: '0 4px 20px rgba(16,185,129,0.4)',
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
@@ -476,11 +473,11 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-8 mt-16 text-emerald-100/30 text-xs font-medium"
+          className="flex flex-wrap justify-center gap-8 mt-16 text-gray-400 text-xs font-medium"
         >
           {['Secure Stripe checkout', 'Cancel anytime', 'Secure & encrypted', '24h support'].map((t) => (
             <span key={t} className="flex items-center gap-2">
-              <span className="w-1 h-1 bg-emerald-500 rounded-full" />
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
               {t}
             </span>
           ))}

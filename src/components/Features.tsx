@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import * as THREE from 'three';
+
 import {
   PawPrint,
   Calendar,
@@ -187,122 +187,11 @@ export default function Features() {
 
 
 
-  // Lazy Three.js background — only init when section is in view
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let cleanup: (() => void) | null = null;
-
-    function init(sectionEl: HTMLElement) {
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-
-      const canvas = renderer.domElement;
-      canvas.style.position = 'absolute';
-      canvas.style.inset = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.pointerEvents = 'none';
-      canvas.style.zIndex = '0';
-      sectionEl.insertBefore(canvas, sectionEl.firstChild);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 1000);
-      camera.position.z = 25;
-
-      const resize = () => {
-        const w = sectionEl.clientWidth;
-        const h = sectionEl.clientHeight;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      };
-      resize();
-      const ro = new ResizeObserver(resize);
-      ro.observe(sectionEl);
-
-      const shapes: THREE.Mesh[] = [];
-      const shapeData: { vx: number; vy: number; rx: number; ry: number }[] = [];
-      const color = new THREE.Color(0x10b981);
-
-      for (let i = 0; i < 12; i++) {
-        const geo = i % 3 === 0
-          ? new THREE.OctahedronGeometry(Math.random() * 0.8 + 0.3)
-          : i % 3 === 1
-            ? new THREE.TetrahedronGeometry(Math.random() * 0.6 + 0.2)
-            : new THREE.IcosahedronGeometry(Math.random() * 0.5 + 0.2, 0);
-
-        const mat = new THREE.MeshBasicMaterial({
-          color,
-          wireframe: true,
-          transparent: true,
-          opacity: Math.random() * 0.15 + 0.03,
-        });
-        const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(
-          (Math.random() - 0.5) * 50,
-          (Math.random() - 0.5) * 30,
-          (Math.random() - 0.5) * 10,
-        );
-        shapes.push(mesh);
-        shapeData.push({
-          vx: (Math.random() - 0.5) * 0.02,
-          vy: (Math.random() - 0.5) * 0.02,
-          rx: (Math.random() - 0.5) * 0.005,
-          ry: (Math.random() - 0.5) * 0.008,
-        });
-        scene.add(mesh);
-      }
-
-      let frame = 0;
-      const animate = () => {
-        frame = requestAnimationFrame(animate);
-        shapes.forEach((s, i) => {
-          s.position.x += shapeData[i].vx;
-          s.position.y += shapeData[i].vy;
-          s.rotation.x += shapeData[i].rx;
-          s.rotation.y += shapeData[i].ry;
-          if (Math.abs(s.position.x) > 26) shapeData[i].vx *= -1;
-          if (Math.abs(s.position.y) > 16) shapeData[i].vy *= -1;
-        });
-        renderer.render(scene, camera);
-      };
-      animate();
-
-      return () => {
-        cancelAnimationFrame(frame);
-        ro.disconnect();
-        renderer.dispose();
-        if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
-      };
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !cleanup) {
-          cleanup = init(section);
-        } else if (!entry.isIntersecting && cleanup) {
-          cleanup();
-          cleanup = null;
-        }
-      },
-      { rootMargin: '300px' }
-    );
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      if (cleanup) cleanup();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <section
       ref={sectionRef}
       id="features"
-      className="py-12 sm:py-24 bg-[#07100c] relative overflow-hidden"
+      className="py-12 sm:py-24 bg-section-gradient relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS glow blobs */}
@@ -333,7 +222,7 @@ export default function Features() {
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mt-2 mb-4 leading-tight"
             >
               Powerful Features for{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600">
                 Modern Pet Care
               </span>
             </motion.h2>
@@ -371,17 +260,16 @@ export default function Features() {
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     className={`
                       relative rounded-3xl border overflow-hidden h-full flex flex-col
-                      bg-gradient-to-br ${feat.accent}
                       backdrop-blur-2xl
-                      border-white/10 hover:border-emerald-500/40
                       ${isHovered ? feat.glow : ''}
-                      transition-all duration-500
                       cursor-pointer
                     `}
                     style={{
-                      background: isHovered
-                        ? `linear-gradient(135deg, ${feat.color}18 0%, rgba(0,0,0,0.4) 100%)`
-                        : 'rgba(255,255,255,0.03)',
+                      background: '#1f2937',
+                      borderColor: hoveredCard === index ? 'rgba(16,185,129,0.35)' : 'rgba(255,255,255,0.08)',
+                      borderRadius: '12px',
+                      boxShadow: hoveredCard === index ? '0 10px 30px rgba(16,185,129,0.1)' : '0 1px 3px rgba(0,0,0,0.1)',
+                      transition: 'all 0.4s ease',
                     }}
                   >
                     {/* Animated top border gradient */}
@@ -428,11 +316,11 @@ export default function Features() {
                       <div className="flex-1">
                         <h3
                           className="text-xl font-black text-white mb-3 transition-colors duration-300"
-                          style={{ color: isHovered ? feat.color : 'white' }}
+                          style={{ color: isHovered ? feat.color : '#ffffff' }}
                         >
                           {feat.title}
                         </h3>
-                        <p className="text-emerald-100/55 leading-relaxed text-sm">
+                        <p className="text-emerald-100/50 leading-relaxed text-sm">
                           {feat.description}
                         </p>
                       </div>
@@ -462,8 +350,8 @@ export default function Features() {
               onClick={() => setActiveIndex(i)}
               className={`rounded-full transition-all duration-400 cursor-pointer ${
                 activeIndex === i
-                  ? 'w-10 h-2.5 bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.7)]'
-                  : 'w-2.5 h-2.5 bg-white/15 hover:bg-white/35'
+                  ? 'w-10 h-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
+                  : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
               }`}
               aria-label={`Go to slide ${i + 1}`}
             />

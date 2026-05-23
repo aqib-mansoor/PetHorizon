@@ -120,6 +120,7 @@ export default function SmartFeatures() {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    const sectionEl = section as HTMLElement;
 
     let cleanup: (() => void) | null = null;
 
@@ -134,22 +135,22 @@ export default function SmartFeatures() {
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      section.insertBefore(canvas, section.firstChild);
+      sectionEl.insertBefore(canvas, sectionEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 500);
       camera.position.z = 30;
 
       const resize = () => {
-        const w = section.clientWidth;
-        const h = section.clientHeight;
+        const w = sectionEl.clientWidth;
+        const h = sectionEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(section);
+      ro.observe(sectionEl);
 
       // Particle network
       const gridCount = 50;
@@ -253,7 +254,7 @@ export default function SmartFeatures() {
       },
       { rootMargin: '300px' }
     );
-    observer.observe(section);
+    observer.observe(sectionEl);
 
     return () => {
       observer.disconnect();
@@ -266,7 +267,7 @@ export default function SmartFeatures() {
     <section
       ref={sectionRef}
       id="smart-features"
-      className="py-14 sm:py-28 bg-[#040806] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS blobs */}
@@ -287,10 +288,10 @@ export default function SmartFeatures() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mt-6 mb-5"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mt-6 mb-5"
           >
             Smart{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600">
               Features
             </span>
           </motion.h2>
@@ -299,7 +300,7 @@ export default function SmartFeatures() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-emerald-100/60 text-lg"
+            className="text-gray-600 text-lg"
           >
             Experience next-generation pet care powered by tailored smart engines.
           </motion.p>
@@ -322,11 +323,9 @@ export default function SmartFeatures() {
                 onHoverEnd={() => setHoveredCard(null)}
                 className="relative rounded-3xl overflow-hidden cursor-pointer group"
                 style={{
-                  background: isHovered
-                    ? `linear-gradient(160deg, ${item.color}18 0%, rgba(4,8,6,0.95) 100%)`
-                    : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${isHovered ? item.color + '50' : 'rgba(255,255,255,0.08)'}`,
-                  boxShadow: isHovered ? `0 0 60px -10px ${item.color}50` : 'none',
+                  background: '#ffffff',
+                  borderColor: isHovered ? 'rgba(16,185,129,0.35)' : 'rgba(243,244,246,1)',
+                  boxShadow: isHovered ? '0 10px 30px rgba(16,185,129,0.06)' : '0 1px 3px rgba(0,0,0,0.02)',
                   transition: 'all 0.4s ease',
                 }}
               >
@@ -371,11 +370,11 @@ export default function SmartFeatures() {
                   <div className="flex-1">
                     <h3
                       className="text-xl font-black mb-3 transition-colors duration-300"
-                      style={{ color: isHovered ? item.color : 'white' }}
+                      style={{ color: isHovered ? item.color : '#1f2937' }}
                     >
                       {item.title}
                     </h3>
-                    <p className="text-emerald-100/55 leading-relaxed text-sm">
+                    <p className="text-gray-500 leading-relaxed text-sm">
                       {item.description}
                     </p>
                   </div>

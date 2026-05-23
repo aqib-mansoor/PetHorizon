@@ -161,7 +161,7 @@ export default function WhyChoose() {
     <section
       ref={sectionRef}
       id="why-choose"
-      className="py-14 sm:py-28 bg-[#050b08] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-section-light relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <WhyChooseBackground containerRef={sectionRef} />
@@ -185,13 +185,13 @@ export default function WhyChoose() {
             <span className="text-primary font-bold tracking-wider text-xs uppercase bg-primary/10 px-4 py-2 rounded-full border border-primary/20 shadow-sm inline-block">
               The Pet Horizon Advantage
             </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mt-6 mb-5 leading-tight">
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mt-6 mb-5 leading-tight">
               Why Choose{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600">
                 Pet Horizon?
               </span>
             </h2>
-            <p className="text-emerald-100/55 leading-relaxed mb-10 text-lg">
+            <p className="text-gray-600 leading-relaxed mb-10 text-lg">
               We design our companion platform to be as loving, careful, and proactive as you are with your furry family members.
             </p>
 
@@ -199,55 +199,45 @@ export default function WhyChoose() {
             <div className="space-y-5">
               <motion.div
                 whileHover={{ x: 6 }}
-                className="flex items-center gap-5 p-6 rounded-3xl overflow-hidden relative cursor-pointer group"
-                style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  transition: 'all 0.3s ease',
-                }}
+                className="flex items-center gap-5 p-6 rounded-3xl overflow-hidden relative cursor-pointer group shadow-sm bg-white border border-gray-200/80 transition-all duration-300"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(16,185,129,0.4)';
-                  e.currentTarget.style.boxShadow = '0 0 40px rgba(16,185,129,0.15)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(16,185,129,0.06)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(229,231,235,0.8)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all duration-300">
-                  <Award className="w-6 h-6 text-emerald-400 group-hover:text-white transition-colors" />
+                  <Award className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <AnimatedCounter target="#1" suffix="" />
-                  <h4 className="font-bold text-white text-sm mt-1">Smart Care App</h4>
-                  <p className="text-xs text-emerald-100/45 mt-0.5">Voted best upcoming companion tool in 2026.</p>
+                  <h4 className="font-bold text-gray-800 text-sm mt-1">Smart Care App</h4>
+                  <p className="text-xs text-gray-500 mt-0.5">Voted best upcoming companion tool in 2026.</p>
                 </div>
               </motion.div>
 
               <motion.div
                 whileHover={{ x: 6 }}
-                className="flex items-center gap-5 p-6 rounded-3xl overflow-hidden relative cursor-pointer group"
-                style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  transition: 'all 0.3s ease',
-                }}
+                className="flex items-center gap-5 p-6 rounded-3xl overflow-hidden relative cursor-pointer group shadow-sm bg-white border border-gray-200/80 transition-all duration-300"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(16,185,129,0.4)';
-                  e.currentTarget.style.boxShadow = '0 0 40px rgba(16,185,129,0.15)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(16,185,129,0.06)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(229,231,235,0.8)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all duration-300">
-                  <HeartHandshake className="w-6 h-6 text-emerald-400 group-hover:text-white transition-colors" />
+                  <HeartHandshake className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" />
                 </div>
                 <div>
-                  <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Vet-Approved</span>
-                  <h4 className="font-bold text-white text-sm mt-1">Made by Vet Advisors</h4>
-                  <p className="text-xs text-emerald-100/45 mt-0.5">Every feature is guided by professional veterinary advice.</p>
+                  <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">Vet-Approved</span>
+                  <h4 className="font-bold text-gray-800 text-sm mt-1">Made by Vet Advisors</h4>
+                  <p className="text-xs text-gray-500 mt-0.5">Every feature is guided by professional veterinary advice.</p>
                 </div>
               </motion.div>
             </div>
@@ -274,14 +264,11 @@ export default function WhyChoose() {
                     whileHover={{ x: 6, scale: 1.01 }}
                     onHoverStart={() => setHoveredBenefit(idx)}
                     onHoverEnd={() => setHoveredBenefit(null)}
-                    className="flex items-start gap-4 p-5 rounded-3xl text-left cursor-pointer group relative overflow-hidden"
+                    className="flex items-start gap-4 p-5 rounded-3xl text-left cursor-pointer group relative overflow-hidden bg-white border border-gray-100 shadow-sm"
                     style={{
-                      background: isHovered
-                        ? 'linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(0,0,0,0.5) 100%)'
-                        : 'rgba(255,255,255,0.03)',
-                      border: `1px solid ${isHovered ? 'rgba(16,185,129,0.4)' : 'rgba(255,255,255,0.08)'}`,
-                      boxShadow: isHovered ? '0 0 30px rgba(16,185,129,0.12)' : 'none',
-                      transition: 'all 0.3s ease',
+                      borderColor: hoveredBenefit === idx ? 'rgba(16,185,129,0.3)' : 'rgba(243,244,246,1)',
+                      boxShadow: hoveredBenefit === idx ? '0 10px 25px rgba(16,185,129,0.06)' : '0 1px 3px rgba(0,0,0,0.02)',
+                      transition: 'all 0.4s ease',
                     }}
                   >
                     {/* Shimmer top */}
@@ -297,24 +284,24 @@ export default function WhyChoose() {
                     <div
                       className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300"
                       style={{
-                        backgroundColor: isHovered ? 'rgba(16,185,129,0.25)' : 'rgba(16,185,129,0.1)',
-                        border: `1px solid ${isHovered ? 'rgba(16,185,129,0.5)' : 'rgba(16,185,129,0.2)'}`,
-                        boxShadow: isHovered ? '0 0 15px rgba(16,185,129,0.3)' : 'none',
+                        backgroundColor: isHovered ? 'rgba(16,185,129,0.2)' : 'rgba(16,185,129,0.08)',
+                        border: `1px solid ${isHovered ? 'rgba(16,185,129,0.4)' : 'rgba(16,185,129,0.15)'}`,
+                        boxShadow: isHovered ? '0 0 10px rgba(16,185,129,0.15)' : 'none',
                       }}
                     >
                       <CheckCircle2
-                        className="w-4 h-4 text-emerald-400 transition-transform duration-300"
+                        className="w-4 h-4 text-emerald-500 transition-transform duration-300"
                         style={{ transform: isHovered ? 'scale(1.15)' : 'scale(1)' }}
                       />
                     </div>
                     <div>
                       <h4
                         className="font-bold text-sm transition-colors duration-200"
-                        style={{ color: isHovered ? '#10b981' : 'white' }}
+                        style={{ color: isHovered ? '#059669' : '#1f2937' }}
                       >
                         {benefit.title}
                       </h4>
-                      <p className="text-xs text-emerald-100/45 mt-1 leading-relaxed">{benefit.desc}</p>
+                      <p className="text-xs text-gray-500 mt-1 leading-relaxed">{benefit.desc}</p>
                     </div>
                   </motion.div>
                 );

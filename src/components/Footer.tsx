@@ -12,6 +12,7 @@ function FooterBackground({ containerRef }: { containerRef: React.RefObject<HTML
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    const containerEl = container as HTMLElement;
 
     let cleanup: (() => void) | null = null;
 
@@ -26,22 +27,22 @@ function FooterBackground({ containerRef }: { containerRef: React.RefObject<HTML
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      container.insertBefore(canvas, container.firstChild);
+      containerEl.insertBefore(canvas, containerEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 500);
       camera.position.z = 20;
 
       const resize = () => {
-        const w = container.clientWidth;
-        const h = container.clientHeight;
+        const w = containerEl.clientWidth;
+        const h = containerEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(container);
+      ro.observe(containerEl);
 
       // Firefly particles rising slowly
       const count = 50;
@@ -125,7 +126,7 @@ function FooterBackground({ containerRef }: { containerRef: React.RefObject<HTML
       },
       { rootMargin: '300px' }
     );
-    observer.observe(container);
+    observer.observe(containerEl);
 
     return () => {
       observer.disconnect();
@@ -142,7 +143,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-[#030605] text-emerald-100/80 pt-24 pb-12 relative overflow-hidden"
+      className="bg-section-light text-gray-600 pt-24 pb-12 relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <FooterBackground containerRef={footerRef} />
@@ -163,7 +164,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(229,231,235,0.8)' }}>
 
           {/* Column 1: Brand Info */}
           <motion.div
@@ -177,9 +178,9 @@ export default function Footer() {
               <div
                 className="rounded-full p-1"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  boxShadow: '0 0 15px rgba(16,185,129,0.15)',
+                  background: 'rgba(255,255,255,1)',
+                  border: '1px solid rgba(229,231,235,1)',
+                  boxShadow: '0 4px 12px rgba(16,185,129,0.06)',
                 }}
               >
                 <img
@@ -188,11 +189,11 @@ export default function Footer() {
                   className="h-10 w-auto object-contain rounded-full"
                 />
               </div>
-              <span className="bg-gradient-to-r from-white to-emerald-400 bg-clip-text text-transparent tracking-wide font-black">
+              <span className="bg-gradient-to-r from-emerald-800 to-teal-600 bg-clip-text text-transparent tracking-wide font-black">
                 Pet Horizon
               </span>
             </div>
-            <p className="text-emerald-100/45 text-sm leading-relaxed mb-8 max-w-sm">
+            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
               Your complete smart pet care companion platform. Manage health, schedules, meals, budgets, and capture memories in one beautiful dashboard.
             </p>
 
@@ -226,21 +227,21 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-emerald-400 cursor-pointer group"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer group"
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'rgba(243,244,246,1)',
+                    border: '1px solid rgba(229,231,235,1)',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = 'rgba(16,185,129,1)';
                     e.currentTarget.style.borderColor = 'rgba(16,185,129,1)';
-                    e.currentTarget.style.boxShadow = '0 0 20px rgba(16,185,129,0.5)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(16,185,129,0.3)';
                     e.currentTarget.style.color = 'white';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                    e.currentTarget.style.background = 'rgba(243,244,246,1)';
+                    e.currentTarget.style.borderColor = 'rgba(229,231,235,1)';
                     e.currentTarget.style.boxShadow = 'none';
                     e.currentTarget.style.color = '';
                   }}
@@ -278,10 +279,10 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-emerald-100/45 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 group-hover:bg-emerald-400 group-hover:shadow-[0_0_8px_rgba(16,185,129,0.5)] transition-all duration-300"
+                      className="w-1.5 h-1.5 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500 transition-all duration-300"
                     />
                     {link.label}
                   </a>
@@ -329,24 +330,24 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="rounded-2xl p-2.5 block cursor-pointer group"
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'rgba(243,244,246,1)',
+                    border: '1px solid rgba(229,231,235,1)',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = 'rgba(16,185,129,0.4)';
-                    e.currentTarget.style.background = 'rgba(16,185,129,0.08)';
-                    e.currentTarget.style.boxShadow = '0 0 25px rgba(16,185,129,0.15)';
-                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.background = 'rgba(16,185,129,0.06)';
+                    e.currentTarget.style.boxShadow = '0 6px 18px rgba(16,185,129,0.08)';
+                    e.currentTarget.style.transform = 'scale(1.03)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    e.currentTarget.style.borderColor = 'rgba(229,231,235,1)';
+                    e.currentTarget.style.background = 'rgba(243,244,246,1)';
                     e.currentTarget.style.boxShadow = 'none';
                     e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
-                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 opacity-85 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
               ))}
             </div>
@@ -360,12 +361,12 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-100/25 gap-4"
+          className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4"
         >
           <p>Pet Horizon © 2026 | Smart Pet Care Platform 🐾</p>
           <div className="flex items-center gap-1.5">
             <span>Made with</span>
-            <Heart className="w-3 h-3 text-emerald-400 fill-emerald-400 animate-pulse" />
+            <Heart className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 animate-pulse" />
             <span>for pet owners worldwide.</span>
           </div>
         </motion.div>

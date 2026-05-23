@@ -1,29 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-primary: #10B981;
   --color-darkgreen: #064E3B;
   --color-lightgreen: #D1FAE5;
   --color-mint: #6EE7B7;
   --color-warmgray: #F9FAFB;
   --color-success: #059669;
+  /* Design tokens */
+  --primary-gradient: linear-gradient(135deg, #0ea5e9, #34d399);
+  --secondary-accent: #fbbf24;
+  --card-bg: rgba(255,255,255,0.04);
+  --card-radius: 16px;
+  --card-shadow: 0 10px 15px rgba(0,0,0,0.2);
+}
+
+:root {
+  --section-bg-light: #F8FAFC;
+  --section-bg-gradient: #FFFFFF;
 }
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Inter', 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  @apply bg-white text-gray-800 antialiased overflow-x-hidden;
+  background-color: #ffffff; color: #1f2937; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar — light theme */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F0FDF4;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
   background: #10B981;
@@ -58,6 +71,10 @@ body {
   0% { transform: rotateY(0deg) rotateX(15deg); }
   100% { transform: rotateY(360deg) rotateX(15deg); }
 }
+
+/* Dark theme section backgrounds */
+.bg-section-light { background: var(--section-bg-light); }
+.bg-section-gradient { background: var(--section-bg-gradient); }
 
 @keyframes cubeFloat {
   0% { transform: rotateX(25deg) rotateY(0deg); }

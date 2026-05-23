@@ -22,8 +22,10 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Features', href: '#features' },
+    { name: 'Transformations', href: '#transformations' },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Community', href: '#community' },
+    { name: 'Reviews', href: '#reviews' },
   ];
 
   return (
@@ -31,7 +33,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#040806]/80 backdrop-blur-md border-b border-emerald-500/10 shadow-lg py-4'
+            ? 'bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm py-4'
             : 'bg-transparent py-6'
         }`}
       >
@@ -40,14 +42,18 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href="#home"
-              className="flex items-center space-x-2.5 text-2xl font-black text-white hover:opacity-90 transition-opacity"
+              className="flex items-center space-x-2.5 text-2xl font-black hover:opacity-90 transition-opacity"
             >
               <img
                 src={logoImg}
                 alt="Pet Horizon Logo"
                 className="h-10 w-auto object-contain rounded-full bg-emerald-500/10 p-0.5 border border-emerald-500/20"
               />
-              <span className="bg-gradient-to-r from-white via-emerald-100 to-emerald-400 bg-clip-text text-transparent tracking-wide">
+              <span className={`tracking-wide transition-all duration-300 bg-gradient-to-r bg-clip-text text-transparent ${
+                isScrolled
+                  ? 'from-emerald-600 via-emerald-500 to-teal-500'
+                  : 'from-slate-900 via-slate-800 to-emerald-600'
+              }`}>
                 Pet Horizon
               </span>
             </a>
@@ -58,14 +64,14 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="font-medium text-emerald-100/80 hover:text-white hover:scale-105 transition-all duration-200"
+                  className="font-semibold text-slate-700 hover:text-emerald-600 transition-all duration-200 hover:scale-105 text-sm"
                 >
                   {link.name}
                 </a>
               ))}
               <a
                 href="#pricing"
-                className="bg-primary hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md shadow-emerald-500/20 hover:shadow-emerald-600/35 transition-all duration-200 hover:scale-[1.03]"
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md shadow-emerald-500/10 hover:shadow-emerald-600/20 transition-all duration-200 hover:scale-[1.03] text-sm"
               >
                 Get Started
               </a>
@@ -75,7 +81,11 @@ export default function Navbar() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="focus:outline-none p-2 rounded-xl transition-all duration-200 text-emerald-100/80 hover:text-white hover:bg-white/5 border border-white/5"
+                className={`focus:outline-none p-2 rounded-xl transition-all duration-200 border ${
+                  isScrolled
+                    ? 'text-slate-800 hover:text-emerald-600 hover:bg-slate-50 border-slate-100'
+                    : 'text-slate-800 hover:text-emerald-600 hover:bg-slate-50 border-slate-200/60'
+                }`}
                 aria-label="Toggle menu"
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -93,7 +103,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[76px] z-40 md:hidden bg-[#040806]/95 backdrop-blur-lg border-b border-emerald-500/10 shadow-2xl"
+            className="fixed inset-x-0 top-[76px] z-40 md:hidden bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-2xl"
           >
             <div className="px-4 pt-2 pb-6 space-y-3">
               {navLinks.map((link) => (
@@ -101,7 +111,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block text-emerald-100/80 hover:text-white hover:bg-emerald-500/10 px-4 py-3 rounded-xl font-semibold transition-all duration-200"
+                  className="block text-slate-700 hover:text-emerald-600 hover:bg-slate-50 px-4 py-3 rounded-xl font-semibold transition-all duration-200"
                 >
                   {link.name}
                 </a>
@@ -110,7 +120,7 @@ export default function Navbar() {
                 <a
                   href="#pricing"
                   onClick={() => setIsOpen(false)}
-                  className="block text-center bg-primary hover:bg-emerald-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-emerald-500/20"
+                  className="block text-center bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-emerald-500/25"
                 >
                   Get Started
                 </a>
