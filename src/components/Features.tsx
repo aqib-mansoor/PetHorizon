@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
 import {
@@ -11,8 +11,6 @@ import {
   Package,
   Users,
   Bell,
-  ChevronLeft,
-  ChevronRight,
   LucideIcon,
   Sparkles,
 } from 'lucide-react';
@@ -187,13 +185,7 @@ export default function Features() {
     return () => clearInterval(timer);
   }, [maxIndex, hoveredCard]);
 
-  const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
-  }, [maxIndex]);
 
-  const handlePrev = useCallback(() => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
-  }, [maxIndex]);
 
   // Lazy Three.js background — only init when section is in view
   useEffect(() => {
@@ -355,29 +347,6 @@ export default function Features() {
               9 powerful tools designed to keep your pet care organized and stress-free.
             </motion.p>
           </div>
-
-          {/* Controls */}
-          <div className="flex items-center gap-4">
-            <span className="text-emerald-100/40 text-sm font-medium">
-              {activeIndex + 1} / {maxIndex + 1}
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handlePrev}
-                className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-white flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md group"
-                aria-label="Previous Feature"
-              >
-                <ChevronLeft className="w-5 h-5 group-hover:text-emerald-400 transition-colors" />
-              </button>
-              <button
-                onClick={handleNext}
-                className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 text-emerald-400 flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-md"
-                aria-label="Next Feature"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Carousel */}
@@ -452,18 +421,7 @@ export default function Features() {
                             <Icon className="w-5 h-5 drop-shadow-lg" />
                           </div>
                         </div>
-                        <div>
-                          <span
-                            className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border"
-                            style={{
-                              color: feat.color,
-                              borderColor: `${feat.color}40`,
-                              backgroundColor: `${feat.color}15`,
-                            }}
-                          >
-                            Feature {String(index + 1).padStart(2, '0')}
-                          </span>
-                        </div>
+
                       </div>
 
                       {/* Text */}
