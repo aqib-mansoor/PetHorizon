@@ -1,9 +1,99 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Check, Star } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import * as THREE from 'three';
+import { Check, Star, Zap, Shield } from 'lucide-react';
+
+// CSS 3D Crystal — replaces per-card WebGL renderer
+function CSSCrystal({ isPremium }: { isPremium: boolean }) {
+  const size = 120;
+  const color = isPremium ? '#10b981' : '#6ee7b7';
+
+  return (
+    <div className="relative flex-shrink-0" style={{ width: size, height: size, perspective: `${size * 3}px` }}>
+      {/* Outer glow */}
+      <div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: `radial-gradient(circle, ${color}${isPremium ? '30' : '20'}, transparent 65%)`,
+          animation: 'orbPulse 3.5s ease-in-out infinite',
+        }}
+      />
+      {/* Main shape — diamond/octahedron for premium, cube-ish for free */}
+      <div
+        className="absolute"
+        style={{
+          inset: isPremium ? '15%' : '18%',
+          background: `radial-gradient(circle at 28% 28%, ${color}dd, ${color}55 50%, ${color}15 100%)`,
+          boxShadow: `0 0 ${size / 3}px ${color}44, 0 0 ${size / 5}px ${color}55, inset 0 0 ${size / 4}px ${color}20`,
+          borderRadius: isPremium ? '20% 50% 50% 50%' : '22%',
+          animation: isPremium ? 'crystalSpin 10s linear infinite' : 'cubeFloat 14s linear infinite',
+          transformStyle: 'preserve-3d',
+        }}
+      />
+      {/* Ring 1 */}
+      <div
+        className="absolute rounded-full border"
+        style={{
+          inset: '5%',
+          borderColor: `${color}${isPremium ? '40' : '25'}`,
+          borderWidth: isPremium ? '1.5px' : '1px',
+          animation: 'orbRing1 8s linear infinite',
+          transformStyle: 'preserve-3d',
+        }}
+      />
+      {/* Ring 2 */}
+      <div
+        className="absolute rounded-full border"
+        style={{
+          inset: '12%',
+          borderColor: `${color}20`,
+          animation: 'orbRing2 12s linear infinite',
+          transformStyle: 'preserve-3d',
+        }}
+      />
+      {/* Orbiting dots for premium */}
+      {isPremium && (
+        <>
+          {[0, 1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: 4,
+                height: 4,
+                top: '50%',
+                left: '50%',
+                marginLeft: -2,
+                marginTop: -2,
+                background: color,
+                boxShadow: `0 0 6px ${color}`,
+                animation: `dotOrbit ${5 + i}s linear infinite`,
+                animationDelay: `${i * 1.2}s`,
+              }}
+            />
+          ))}
+        </>
+      )}
+      {/* Highlight */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: size * 0.15,
+          height: size * 0.15,
+          top: '20%',
+          left: '25%',
+          background: `${color}88`,
+          filter: `blur(${size * 0.05}px)`,
+        }}
+      />
+    </div>
+  );
+}
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState<boolean>(false);
+  const [hoveredPlan, setHoveredPlan] = useState<'free' | 'premium' | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const freeFeatures: string[] = [
     '1 Pet Limit',
@@ -24,150 +114,377 @@ export default function Pricing() {
     'Multi-Pet Access',
   ];
 
-  return (
-    <section id="pricing" className="py-24 bg-[#080d0b] relative overflow-hidden">
-      {/* Background soft light */}
-      <div className="absolute top-1/4 right-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] pointer-events-none -z-10"></div>
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+  // Lazy Three.js background
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+    let cleanup: (() => void) | null = null;
+
+    function init(sectionEl: HTMLElement) {
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+      const canvas = renderer.domElement;
+      canvas.style.position = 'absolute';
+      canvas.style.inset = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '0';
+      sectionEl.insertBefore(canvas, sectionEl.firstChild);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 500);
+      camera.position.z = 35;
+
+      const resize = () => {
+        const w = sectionEl.clientWidth;
+        const h = sectionEl.clientHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      };
+      resize();
+      const ro = new ResizeObserver(resize);
+      ro.observe(sectionEl);
+
+      const hexGroup = new THREE.Group();
+      scene.add(hexGroup);
+
+      for (let i = 0; i < 16; i++) {
+        const geo = new THREE.CircleGeometry(Math.random() * 2 + 1, 6);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0x10b981,
+          wireframe: true,
+          transparent: true,
+          opacity: Math.random() * 0.05 + 0.02,
+        });
+        const hex = new THREE.Mesh(geo, mat);
+        hex.position.set(
+          (Math.random() - 0.5) * 60,
+          (Math.random() - 0.5) * 40,
+          (Math.random() - 0.5) * 5,
+        );
+        hex.rotation.z = Math.random() * Math.PI;
+        hexGroup.add(hex);
+      }
+
+      let frame = 0;
+      const animate = () => {
+        frame = requestAnimationFrame(animate);
+        hexGroup.rotation.z += 0.0005;
+        hexGroup.children.forEach((c) => {
+          (c as THREE.Mesh).rotation.z += 0.002;
+        });
+        renderer.render(scene, camera);
+      };
+      animate();
+
+      return () => {
+        cancelAnimationFrame(frame);
+        ro.disconnect();
+        renderer.dispose();
+        if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !cleanup) {
+          cleanup = init(section);
+        } else if (!entry.isIntersecting && cleanup) {
+          cleanup();
+          cleanup = null;
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      if (cleanup) cleanup();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="pricing"
+      className="py-28 bg-[#080d0b] relative overflow-hidden"
+      style={{ isolation: 'isolate' }}
+    >
+      {/* CSS glows */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-emerald-500/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-600/8 rounded-full blur-[130px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-primary font-bold tracking-wider text-xs uppercase bg-primary/10 px-4 py-2 rounded-full border border-primary/20 shadow-sm">
-            Flexible Plans
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mt-6 mb-4">
-            Simple, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-300">Transparent</span> Pricing
-          </h2>
-          <p className="text-emerald-100/60 text-lg">
-            Choose the perfect companion plan for your pet family.
-          </p>
-
-          {/* Toggle Switch */}
-          <div className="flex items-center justify-center mt-8 space-x-4">
-            <span className={`text-sm font-semibold transition-colors duration-200 ${!isYearly ? 'text-white' : 'text-emerald-100/40'}`}>
-              Monthly
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <span className="text-primary font-bold tracking-wider text-xs uppercase bg-primary/10 px-4 py-2 rounded-full border border-primary/20 shadow-sm">
+              Flexible Plans
             </span>
-            <button
-              onClick={() => setIsYearly(!isYearly)}
-              className="w-14 h-8 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full p-1 transition-colors duration-200 focus:outline-none relative cursor-pointer"
-            >
-              <motion.div
-                layout
-                className="w-6 h-6 bg-primary rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
-                animate={{ x: isYearly ? 24 : 0 }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-              />
-            </button>
-            <span className={`text-sm font-semibold transition-colors duration-200 ${isYearly ? 'text-white' : 'text-emerald-100/40'} flex items-center space-x-1.5`}>
-              <span>Yearly</span>
-              <span className="bg-primary/20 border border-primary/30 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
-                Save 17%
-              </span>
-            </span>
-          </div>
-        </div>
-
-        {/* Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch mb-20">
-          
-          {/* Free Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ y: -10, scale: 1.02 }}
-            className="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all duration-300 flex flex-col justify-between"
+            transition={{ delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mt-6 mb-4"
           >
-            <div>
-              <div className="mb-6 text-left">
-                <h3 className="text-2xl font-extrabold text-white mb-2">Free Plan</h3>
-                <p className="text-emerald-100/50 text-sm">Essential pet care tools</p>
+            Simple,{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">
+              Transparent
+            </span>{' '}
+            Pricing
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-emerald-100/60 text-lg mb-10"
+          >
+            Choose the perfect companion plan for your pet family.
+          </motion.p>
+
+          {/* Toggle */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="flex items-center justify-center gap-4 p-1.5 bg-white/5 border border-white/10 rounded-2xl w-fit mx-auto backdrop-blur-md"
+          >
+            <button
+              onClick={() => setIsYearly(false)}
+              className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer ${
+                !isYearly
+                  ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]'
+                  : 'text-emerald-100/50 hover:text-white'
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setIsYearly(true)}
+              className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                isYearly
+                  ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]'
+                  : 'text-emerald-100/50 hover:text-white'
+              }`}
+            >
+              Yearly
+              <span className="text-[10px] bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 px-1.5 py-0.5 rounded-full">
+                -17%
+              </span>
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
+
+          {/* Free Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: 'spring', damping: 20 }}
+            whileHover={{ y: -8 }}
+            onHoverStart={() => setHoveredPlan('free')}
+            onHoverEnd={() => setHoveredPlan(null)}
+            className="relative rounded-3xl overflow-hidden cursor-pointer"
+            style={{
+              background: hoveredPlan === 'free'
+                ? 'linear-gradient(135deg, rgba(110,231,183,0.08) 0%, rgba(0,0,0,0.6) 100%)'
+                : 'rgba(255,255,255,0.03)',
+              border: `1px solid ${hoveredPlan === 'free' ? 'rgba(110,231,183,0.35)' : 'rgba(255,255,255,0.08)'}`,
+              boxShadow: hoveredPlan === 'free' ? '0 0 60px rgba(110,231,183,0.15)' : 'none',
+              transition: 'all 0.4s ease',
+            }}
+          >
+            <div className="absolute top-0 left-0 right-0 h-[1.5px]"
+              style={{ background: 'linear-gradient(90deg, transparent, #6ee7b7, transparent)', opacity: hoveredPlan === 'free' ? 0.8 : 0.2 }} />
+
+            <div className="p-8 md:p-10">
+              <div className="flex items-start gap-5 mb-8">
+                <CSSCrystal isPremium={false} />
+                <div className="pt-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Shield className="w-4 h-4 text-teal-400" />
+                    <span className="text-teal-400 text-xs font-bold uppercase tracking-widest">Free Forever</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-1">Free Plan</h3>
+                  <p className="text-emerald-100/50 text-sm">Essential pet care tools</p>
+                </div>
               </div>
-              <div className="flex items-baseline text-white mb-8 text-left">
-                <span className="text-5xl font-extrabold">$0</span>
-                <span className="text-emerald-100/40 text-sm ml-1">/month</span>
+
+              <div className="flex items-baseline gap-2 mb-8 pl-1">
+                <span className="text-6xl font-black text-white">$0</span>
+                <span className="text-emerald-100/40 text-sm">/month</span>
               </div>
-              <ul className="space-y-4 mb-8 text-left">
+
+              <ul className="space-y-3.5 mb-8">
                 {freeFeatures.map((feat, i) => (
-                  <li key={i} className="flex items-start text-emerald-100/70 text-sm hover:translate-x-1 transition-transform duration-200">
-                    <div className="bg-primary/20 border border-primary/30 p-0.5 rounded-full mr-3 flex-shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5 text-primary" />
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.05 * i }}
+                    className="flex items-center gap-3 text-emerald-100/70 text-sm"
+                  >
+                    <div className="w-5 h-5 rounded-full border border-teal-400/40 bg-teal-400/10 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-teal-400" />
                     </div>
                     <span>{feat}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
+
+              <button
+                onClick={() => alert('Welcome to Pet Horizon Free!')}
+                className="w-full py-4 rounded-2xl font-bold text-sm border border-white/15 hover:border-teal-400/50 text-white hover:text-teal-300 bg-white/5 hover:bg-teal-400/10 transition-all duration-300 cursor-pointer"
+              >
+                Get Started Free
+              </button>
             </div>
-            <button
-              onClick={() => alert("Welcome to Pet Horizon Free!")}
-              className="w-full bg-white/5 hover:bg-white/10 text-white py-4 rounded-2xl font-bold border border-white/10 transition-all duration-200 shadow-sm cursor-pointer backdrop-blur-sm"
-            >
-              Get Started
-            </button>
           </motion.div>
 
           {/* Premium Card */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ 
-              duration: 0.6, 
-              delay: 0.1,
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            transition={{ duration: 0.6, type: 'spring', damping: 20, delay: 0.1 }}
+            whileHover={{ y: -8 }}
+            onHoverStart={() => setHoveredPlan('premium')}
+            onHoverEnd={() => setHoveredPlan(null)}
+            className="relative rounded-3xl overflow-hidden cursor-pointer"
+            style={{
+              background: 'linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(0,0,0,0.85) 60%, rgba(52,211,153,0.05) 100%)',
+              border: '1px solid rgba(16,185,129,0.4)',
+              boxShadow: hoveredPlan === 'premium'
+                ? '0 0 80px rgba(16,185,129,0.3), inset 0 0 60px rgba(16,185,129,0.05)'
+                : '0 0 40px rgba(16,185,129,0.15)',
+              transition: 'box-shadow 0.4s ease',
             }}
-            whileHover={{ y: -10, scale: 1.03 }}
-            animate={{ y: [0, -8, 0] }}
-            className="bg-gradient-to-br from-primary/20 via-emerald-900/40 to-black/40 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-primary/50 shadow-[0_0_50px_-10px_rgba(16,185,129,0.4)] flex flex-col justify-between relative overflow-hidden group"
           >
-            {/* Glow accent */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/40 rounded-full blur-[60px] pointer-events-none group-hover:scale-110 group-hover:bg-primary/50 transition-all duration-500"></div>
+            <div
+              className="absolute top-0 left-0 right-0 h-[2px]"
+              style={{
+                background: 'linear-gradient(90deg, transparent, #10b981, #34d399, #10b981, transparent)',
+                opacity: hoveredPlan === 'premium' ? 1 : 0.6,
+              }}
+            />
 
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div className="text-left z-10 relative">
-                  <span className="bg-gradient-to-r from-primary to-emerald-400 text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider inline-block mb-3 shadow-[0_0_20px_rgba(16,185,129,0.5)]">
-                    Most Popular
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-white mb-2">Premium Plan</h3>
+            <div
+              className="absolute top-0 right-0 w-72 h-72 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(16,185,129,0.2) 0%, transparent 70%)' }}
+            />
+
+            <div className="absolute top-5 right-5">
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.6)] uppercase tracking-wider"
+              >
+                <Star className="w-3 h-3 fill-white" />
+                Most Popular
+              </motion.div>
+            </div>
+
+            <div className="p-8 md:p-10">
+              <div className="flex items-start gap-5 mb-8">
+                <CSSCrystal isPremium={true} />
+                <div className="pt-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Zap className="w-4 h-4 text-emerald-400" />
+                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest">Premium Access</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-1">Premium Plan</h3>
                   <p className="text-emerald-100/60 text-sm">Unlimited smart care</p>
                 </div>
-                <div className="bg-primary/20 border border-primary/30 p-2 rounded-xl">
-                  <Star className="w-6 h-6 text-primary fill-primary animate-pulse" />
+              </div>
+
+              <div className="flex items-baseline gap-2 mb-2 pl-1">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={isYearly ? 'yearly' : 'monthly'}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300"
+                  >
+                    {isYearly ? '$4.16' : '$4.99'}
+                  </motion.span>
+                </AnimatePresence>
+                <div>
+                  <div className="text-emerald-100/50 text-sm">/month</div>
+                  {isYearly && <div className="text-emerald-400 text-xs font-bold">billed yearly</div>}
                 </div>
               </div>
-              <div className="flex items-baseline text-white mb-8 text-left">
-                <span className="text-5xl font-extrabold">
-                  {isYearly ? '$4.16' : '$4.99'}
-                </span>
-                <span className="text-emerald-100/50 text-sm ml-1 font-medium">
-                  {isYearly ? '/month (billed yearly)' : '/month'}
-                </span>
-              </div>
-              <ul className="space-y-4 mb-8 text-left">
+              {isYearly && <p className="text-emerald-400/80 text-xs mb-6 pl-1">Save $10.36 per year vs monthly</p>}
+              {!isYearly && <div className="mb-6" />}
+
+              <ul className="space-y-3.5 mb-8">
                 {premiumFeatures.map((feat, i) => (
-                  <li key={i} className="flex items-start text-white text-sm hover:translate-x-1 transition-transform duration-200">
-                    <div className="bg-primary p-0.5 rounded-full mr-3 flex-shrink-0 mt-0.5 shadow-[0_0_10px_rgba(16,185,129,0.4)]">
-                      <Check className="w-3.5 h-3.5 text-white" />
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.05 * i }}
+                    className="flex items-center gap-3 text-white text-sm"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                      <Check className="w-3 h-3 text-white" />
                     </div>
                     <span className="font-medium text-emerald-50">{feat}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
-            <button
-              onClick={() => alert("Redirecting to Premium checkout...")}
-              className="w-full bg-gradient-to-r from-primary to-emerald-500 hover:from-emerald-400 hover:to-emerald-600 text-white py-4 rounded-2xl font-bold shadow-[0_0_25px_rgba(16,185,129,0.4)] hover:shadow-[0_0_40px_rgba(16,185,129,0.6)] transition-all duration-300 cursor-pointer relative z-10 hover:scale-[1.02]"
-            >
-              Join Premium
-            </button>
-          </motion.div>
 
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => alert('Redirecting to Premium checkout...')}
+                className="w-full py-4 rounded-2xl font-black text-white cursor-pointer relative overflow-hidden group"
+                style={{
+                  background: 'linear-gradient(135deg, #10b981, #34d399)',
+                  boxShadow: '0 0 30px rgba(16,185,129,0.5)',
+                }}
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Zap className="w-4 h-4" />
+                  Join Premium
+                </span>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
 
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-wrap justify-center gap-8 mt-16 text-emerald-100/30 text-xs font-medium"
+        >
+          {['Secure Stripe checkout', 'Cancel anytime', 'Secure & encrypted', '24h support'].map((t) => (
+            <span key={t} className="flex items-center gap-2">
+              <span className="w-1 h-1 bg-emerald-500 rounded-full" />
+              {t}
+            </span>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
