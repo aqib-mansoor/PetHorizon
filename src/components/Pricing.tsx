@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 
 export default function Pricing() {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState<boolean>(false);
 
-  const freeFeatures = [
+  const freeFeatures: string[] = [
     '1 Pet Limit',
     'Basic Pet Management',
     'Feeding & Schedule Tracking',
@@ -14,7 +14,7 @@ export default function Pricing() {
     'Birthday Features',
   ];
 
-  const premiumFeatures = [
+  const premiumFeatures: string[] = [
     'Unlimited Pets',
     'Family Sharing',
     'Invite Members',
@@ -114,10 +114,13 @@ export default function Pricing() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: 0.1,
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
             whileHover={{ y: -10, scale: 1.03 }}
             animate={{ y: [0, -8, 0] }}
-            transition={{ y: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
             className="bg-gradient-to-br from-primary/20 via-emerald-900/40 to-black/40 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-primary/50 shadow-[0_0_50px_-10px_rgba(16,185,129,0.4)] flex flex-col justify-between relative overflow-hidden group"
           >
             {/* Glow accent */}

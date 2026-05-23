@@ -1,9 +1,16 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
-import { UserCheck, PlusCircle, CalendarClock, PenTool, Share2 } from 'lucide-react';
+import { UserCheck, PlusCircle, CalendarClock, PenTool, Share2, LucideIcon } from 'lucide-react';
+
+interface StepItem {
+  step: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
 
 export default function HowItWorks() {
-  const steps = [
+  const steps: StepItem[] = [
     {
       step: 'Step 1',
       title: 'Create Account & Verify',

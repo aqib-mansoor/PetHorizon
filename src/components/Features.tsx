@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   PawPrint,
   Calendar,
@@ -11,11 +11,18 @@ import {
   Users,
   Bell,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  LucideIcon
 } from 'lucide-react';
 
+interface FeatureItem {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
 export default function Features() {
-  const coreFeatures = [
+  const coreFeatures: FeatureItem[] = [
     {
       title: 'Pet Management',
       description: 'Create detailed profiles for breeds, medical histories, and customized character tags.',
@@ -63,8 +70,8 @@ export default function Features() {
     },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(3);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [visibleCards, setVisibleCards] = useState<number>(3);
 
   useEffect(() => {
     const handleResize = () => {

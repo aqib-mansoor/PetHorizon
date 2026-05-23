@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ArrowRight, PawPrint } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,11 +11,11 @@ const bgImages = [
 ];
 
 export default function Hero() {
-  const [bgIndex, setBgIndex] = useState(0);
-  const containerRef = useRef(null);
-  const headlineRef = useRef(null);
-  const subheadlineRef = useRef(null);
-  const buttonsRef = useRef(null);
+  const [bgIndex, setBgIndex] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subheadlineRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const bgTimer = setInterval(() => {
