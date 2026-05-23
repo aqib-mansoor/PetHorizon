@@ -11,7 +11,7 @@ function CTABackground({ containerRef }: { containerRef: React.RefObject<HTMLEle
 
     let cleanup: (() => void) | null = null;
 
-    function init() {
+    function init(containerEl: HTMLElement) {
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
@@ -22,22 +22,22 @@ function CTABackground({ containerRef }: { containerRef: React.RefObject<HTMLEle
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      container.insertBefore(canvas, container.firstChild);
+      containerEl.insertBefore(canvas, containerEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 500);
       camera.position.z = 25;
 
       const resize = () => {
-        const w = container.clientWidth;
-        const h = container.clientHeight;
+        const w = containerEl.clientWidth;
+        const h = containerEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(container);
+      ro.observe(containerEl);
 
       // Spiraling particle ring
       const ringCount = 100;
@@ -98,7 +98,7 @@ function CTABackground({ containerRef }: { containerRef: React.RefObject<HTMLEle
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !cleanup) {
-          cleanup = init();
+          cleanup = init(container);
         } else if (!entry.isIntersecting && cleanup) {
           cleanup();
           cleanup = null;
@@ -123,7 +123,7 @@ export default function CTA() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 bg-[#040806] relative overflow-hidden"
+      className="py-12 sm:py-24 bg-[#040806] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <CTABackground containerRef={sectionRef} />
@@ -131,7 +131,7 @@ export default function CTA() {
       {/* CSS overlay glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Banner Card */}
         <motion.div

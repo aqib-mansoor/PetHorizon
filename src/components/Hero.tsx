@@ -3,27 +3,57 @@ import gsap from 'gsap';
 import { ArrowRight, PawPrint } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const bgImages = [
+// Desktop images – landscape, wide shots
+const desktopImages = [
+  // Happy dog lying on grass, wide landscape shot
   'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=1600',
-  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=1600',
-  'https://images.unsplash.com/photo-1535268647977-a403b69fc756?auto=format&fit=crop&q=80&w=1600',
-  'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=1600'
+  // Cute tabby cat sitting
+  'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=1600',
+  // Two lovebirds perched together, vivid colors
+  'https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&q=80&w=1600',
+  // Adorable bunny
+  'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&q=80&w=1600',
+];
+
+// Mobile images – portrait-friendly, user-provided
+const mobileImages = [
+  // Cute dog – full body, looking at camera
+  'https://images.unsplash.com/photo-1552053831-71594a27632d?fm=jpg&q=80&w=800&auto=format&fit=crop',
+  // Cat portrait – mobile wallpaper
+  'https://wallpapercave.com/wp/wp6942294.jpg',
+  // Rabbit with headphones – vertical mobile wallpaper
+  'https://static.vecteezy.com/system/resources/previews/053/621/879/non_2x/rabbit-in-headphones-sits-playfully-against-soft-white-background-with-charm-vertical-mobile-wallpaper-photo.jpg',
 ];
 
 export default function Hero() {
   const [bgIndex, setBgIndex] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
 
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const images = isMobile ? mobileImages : desktopImages;
+
+  useEffect(() => {
+    setBgIndex(0); // reset on device change
+  }, [isMobile]);
+
   useEffect(() => {
     const bgTimer = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % bgImages.length);
-    }, 3000);
+      setBgIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
 
     return () => clearInterval(bgTimer);
-  }, []);
+  }, [images.length]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -58,40 +88,40 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
-            key={bgIndex}
+            key={`${isMobile ? 'm' : 'd'}-${bgIndex}`}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: 'easeInOut' }}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${bgImages[bgIndex]})` }}
+            style={{ backgroundImage: `url(${images[bgIndex]})` }}
           />
         </AnimatePresence>
-        {/* Dark vignette overlay for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none"></div>
-        <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+        {/* Dark vignette overlay for text legibility - darkened on mobile to handle central image high contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/45 to-black/30 sm:to-transparent"></div>
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-black/20 sm:bg-black/15 pointer-events-none"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-left">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10 w-full text-left">
         <div className="max-w-3xl">
           
           {/* Logo/Icon mini-heading */}
-          <div className="inline-flex items-center space-x-2 bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-primary px-4 py-2 rounded-full mb-6">
+          <div className="inline-flex items-center space-x-2 bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-primary px-4 py-2 rounded-full mb-4 sm:mb-6">
             <PawPrint className="w-4 h-4 fill-primary" />
             <span className="text-xs font-bold uppercase tracking-wider text-white">Smart Pet Care Platform</span>
           </div>
 
           <h1
             ref={headlineRef}
-            className="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-6"
+            className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.15] sm:leading-[1.1] mb-4 sm:mb-6"
           >
             Your Complete <span className="bg-primary text-white px-3 py-1 rounded-2xl inline-block shadow-lg shadow-emerald-500/20">Smart Pet Care</span> Companion 🐾
           </h1>
           
           <p
             ref={subheadlineRef}
-            className="text-lg sm:text-xl text-gray-200 leading-relaxed mb-10 max-w-2xl"
+            className="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-10 max-w-2xl"
           >
             Manage your pet’s daily life, health, schedules, expenses, family access, reminders, and memories — all in one powerful, unified platform.
           </p>

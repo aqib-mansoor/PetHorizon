@@ -213,14 +213,14 @@ export default function Pricing() {
     <section
       ref={sectionRef}
       id="pricing"
-      className="py-28 bg-[#080d0b] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#080d0b] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS glows */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-emerald-500/5 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-600/8 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

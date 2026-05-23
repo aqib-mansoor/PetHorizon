@@ -4,12 +4,12 @@ import { ShieldCheck, Heart, Sparkles } from 'lucide-react';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-[#050b08] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-950/10 via-[#050b08] to-[#040806] relative overflow-hidden">
+    <section id="about" className="py-12 sm:py-24 bg-[#050b08] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-950/10 via-[#050b08] to-[#040806] relative overflow-hidden">
       {/* Decorative background blur blobs */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           {/* Left Side: Dynamic Premium Cards */}

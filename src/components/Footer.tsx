@@ -160,7 +160,7 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[140px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>

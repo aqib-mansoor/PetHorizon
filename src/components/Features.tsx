@@ -202,7 +202,7 @@ export default function Features() {
 
     let cleanup: (() => void) | null = null;
 
-    function init() {
+    function init(sectionEl: HTMLElement) {
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
@@ -213,22 +213,22 @@ export default function Features() {
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      section.insertBefore(canvas, section.firstChild);
+      sectionEl.insertBefore(canvas, sectionEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 1000);
       camera.position.z = 25;
 
       const resize = () => {
-        const w = section.clientWidth;
-        const h = section.clientHeight;
+        const w = sectionEl.clientWidth;
+        const h = sectionEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(section);
+      ro.observe(sectionEl);
 
       const shapes: THREE.Mesh[] = [];
       const shapeData: { vx: number; vy: number; rx: number; ry: number }[] = [];
@@ -289,7 +289,7 @@ export default function Features() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !cleanup) {
-          cleanup = init();
+          cleanup = init(section);
         } else if (!entry.isIntersecting && cleanup) {
           cleanup();
           cleanup = null;
@@ -310,14 +310,14 @@ export default function Features() {
     <section
       ref={sectionRef}
       id="features"
-      className="py-24 bg-[#07100c] relative overflow-hidden"
+      className="py-12 sm:py-24 bg-[#07100c] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS glow blobs */}
       <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-emerald-500/8 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-600/8 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-6">
@@ -381,7 +381,7 @@ export default function Features() {
         </div>
 
         {/* Carousel */}
-        <div className="relative overflow-hidden -mx-4 px-4 py-6">
+        <div className="relative overflow-hidden -mx-6 px-6 sm:-mx-8 sm:px-8 py-6">
           <motion.div
             className="flex"
             animate={{ x: `-${activeIndex * (100 / visibleCards)}%` }}

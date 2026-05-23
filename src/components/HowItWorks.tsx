@@ -111,7 +111,7 @@ export default function HowItWorks() {
 
     let cleanup: (() => void) | null = null;
 
-    function init() {
+    function init(sectionEl: HTMLElement) {
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
@@ -122,22 +122,22 @@ export default function HowItWorks() {
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      section.insertBefore(canvas, section.firstChild);
+      sectionEl.insertBefore(canvas, sectionEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 500);
       camera.position.z = 30;
 
       const resize = () => {
-        const w = section.clientWidth;
-        const h = section.clientHeight;
+        const w = sectionEl.clientWidth;
+        const h = sectionEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(section);
+      ro.observe(sectionEl);
 
       // DNA helix dots
       const count = 150;
@@ -183,7 +183,7 @@ export default function HowItWorks() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !cleanup) {
-          cleanup = init();
+          cleanup = init(section);
         } else if (!entry.isIntersecting && cleanup) {
           cleanup();
           cleanup = null;
@@ -204,14 +204,14 @@ export default function HowItWorks() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="py-28 bg-[#060e0a] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#060e0a] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS blobs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-600/8 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24">

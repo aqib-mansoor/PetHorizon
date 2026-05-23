@@ -140,7 +140,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-28 bg-[#050b08] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#050b08] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <ContactBackground containerRef={sectionRef} />
@@ -149,7 +149,7 @@ export default function Contact() {
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 

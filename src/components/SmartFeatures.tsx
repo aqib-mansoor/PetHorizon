@@ -266,14 +266,14 @@ export default function SmartFeatures() {
     <section
       ref={sectionRef}
       id="smart-features"
-      className="py-28 bg-[#040806] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#040806] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       {/* CSS blobs */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">

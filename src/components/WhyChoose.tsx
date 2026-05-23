@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import * as THREE from 'three';
-import { CheckCircle2, Award, HeartHandshake, Shield, Zap } from 'lucide-react';
+import { CheckCircle2, Award, HeartHandshake } from 'lucide-react';
 
 interface BenefitItem {
   title: string;
@@ -16,7 +16,7 @@ function WhyChooseBackground({ containerRef }: { containerRef: React.RefObject<H
 
     let cleanup: (() => void) | null = null;
 
-    function init() {
+    function init(containerEl: HTMLElement) {
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
@@ -27,22 +27,22 @@ function WhyChooseBackground({ containerRef }: { containerRef: React.RefObject<H
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
       canvas.style.zIndex = '0';
-      container.insertBefore(canvas, container.firstChild);
+      containerEl.insertBefore(canvas, containerEl.firstChild);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 500);
       camera.position.z = 30;
 
       const resize = () => {
-        const w = container.clientWidth;
-        const h = container.clientHeight;
+        const w = containerEl.clientWidth;
+        const h = containerEl.clientHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
       };
       resize();
       const ro = new ResizeObserver(resize);
-      ro.observe(container);
+      ro.observe(containerEl);
 
       const torusGeo = new THREE.TorusKnotGeometry(8, 0.4, 100, 8, 2, 3);
       const torusMat = new THREE.MeshBasicMaterial({
@@ -94,7 +94,7 @@ function WhyChooseBackground({ containerRef }: { containerRef: React.RefObject<H
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !cleanup) {
-          cleanup = init();
+          cleanup = init(container);
         } else if (!entry.isIntersecting && cleanup) {
           cleanup();
           cleanup = null;
@@ -161,7 +161,7 @@ export default function WhyChoose() {
     <section
       ref={sectionRef}
       id="why-choose"
-      className="py-28 bg-[#050b08] relative overflow-hidden"
+      className="py-14 sm:py-28 bg-[#050b08] relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <WhyChooseBackground containerRef={sectionRef} />
@@ -170,7 +170,7 @@ export default function WhyChoose() {
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
