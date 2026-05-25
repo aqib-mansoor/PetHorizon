@@ -169,7 +169,7 @@ export default function GallerySection() {
         </div>{/* end section heading row */}
 
         {/* High-Performance Staggered Masonry Grid Canvas Layout */}
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {gallery.map((item, idx) => {
             const isLiked = parentHearts[item.id];
             return (

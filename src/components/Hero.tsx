@@ -55,10 +55,10 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* LEFT COLUMN: Premium High-Conversion Copy & Actions */}
-          <div ref={leftColRef} className="lg:col-span-7 text-left flex flex-col gap-6">
+          <div ref={leftColRef} className="lg:col-span-7 text-center sm:text-left flex flex-col gap-6">
             
             {/* Active App Live Badge */}
-            <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit shadow-sm">
+            <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit mx-auto sm:mx-0 shadow-sm">
               <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" style={{ animationDuration: '3s' }} />
               <span className="text-xs font-bold uppercase tracking-wider">Version 2.0 Now Live on iOS & Android 🚀</span>
             </div>
