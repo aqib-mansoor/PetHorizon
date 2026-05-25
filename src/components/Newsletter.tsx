@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Mail, Send, CheckCircle2, User, PawPrint } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { Mail, Send, CheckCircle2, User, PawPrint } from 'lucide-react';
 
 export default function Newsletter() {
   const [formData, setFormData] = useState({
@@ -19,13 +18,7 @@ export default function Newsletter() {
       return;
     }
 
-    // Launch beautiful, multi-layered canvas-confetti blast
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#10b981', '#34d399', '#6ee7b7', '#059669', '#3b82f6'],
-    });
+
 
     setIsSuccess(true);
   };

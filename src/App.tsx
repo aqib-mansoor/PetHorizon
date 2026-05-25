@@ -6,7 +6,7 @@ import GallerySection from './components/GallerySection';
 import Transformations from './components/Transformations';
 import CommunityHub from './components/CommunityHub';
 import Badges from './components/Badges';
-import Newsletter from './components/Newsletter';
+import ContactUs from './components/ContactUs';
 import Partners from './components/Partners';
 import Comparison from './components/Comparison';
 import Footer from './components/Footer';
@@ -39,8 +39,8 @@ export default function App() {
       {/* Gamification & Achievement Badges */}
       <Badges />
 
-      {/* Newsletter */}
-      <Newsletter />
+      {/* Contact Us Form */}
+      <ContactUs />
 
       {/* Partner Logos Ribbon */}
       <Partners />

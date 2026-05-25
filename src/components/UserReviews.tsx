@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ThumbsUp, PlusCircle, X, ChevronDown, Check } from 'lucide-react';
+import { Star, ThumbsUp, X, ChevronDown, Check } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -299,14 +299,6 @@ export default function UserReviews() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-3 pointer-events-none" />
             </div>
 
-            {/* Launch Review Form Trigger */}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-sm"
-            >
-              <PlusCircle className="w-4 h-4" />
-              Write Review
-            </button>
           </div>
 
         </div>
