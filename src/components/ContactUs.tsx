@@ -49,7 +49,7 @@ export default function ContactUs() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-stretch">
             
             {/* LEFT REGION: Brand & Info Panel (5 Cols) */}
-            <div className="md:col-span-5 bg-emerald-50/70 border-r border-slate-200 p-8 sm:p-10 flex flex-col justify-between text-left relative overflow-hidden">
+            <div className="md:col-span-5 bg-emerald-50/70 border-b md:border-b-0 md:border-r border-slate-200 p-8 sm:p-10 flex flex-col justify-between text-left relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none" />
 
               <div className="flex flex-col gap-6 relative z-10">

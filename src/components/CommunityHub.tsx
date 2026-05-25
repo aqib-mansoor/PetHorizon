@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Calendar, Trophy, ChevronDown, Award, Users, Star } from 'lucide-react';
+import { MessageSquare, Trophy, ChevronDown, Award, Users, Star } from 'lucide-react';
 
 interface QAItem {
   id: number;
@@ -8,14 +8,6 @@ interface QAItem {
   answersCount: number;
   bestAnswer: string;
   askedBy: string;
-}
-
-interface EventItem {
-  id: number;
-  title: string;
-  date: string;
-  time: string;
-  type: string;
 }
 
 interface Contributor {
@@ -42,34 +34,24 @@ const QA_DATA: QAItem[] = [
   },
   {
     id: 3,
-    question: 'Tips for introducing a conure conure to adult dogs?',
+    question: 'Tips for introducing a conure to adult dogs?',
     answersCount: 8,
     bestAnswer: 'Always introduce birds and dogs in a controlled, neutral space. Keep the conure in its cage initially while rewarding your dog for calm behavior. Progress slowly and never leave them unsupervised.',
     askedBy: 'Ryan P. • Chicago, IL',
   },
-];
-
-const EVENTS_DATA: EventItem[] = [
   {
-    id: 1,
-    title: 'Live Vet Q&A Webinar',
-    date: 'Dec 15, 2026',
-    time: '4:00 PM EST',
-    type: 'Expert Webinar',
+    id: 4,
+    question: 'Is coconut oil safe for grooming dry skin on cats?',
+    answersCount: 6,
+    bestAnswer: 'In small, external amounts, pure virgin coconut oil is safe and can help soothe dry feline skin. Avoid excessive application since cats will lick it off, which might cause digestive issues. Monitor skin progress via your Pet Horizon journal notes.',
+    askedBy: 'Elena R. • Miami, FL',
   },
   {
-    id: 2,
-    title: 'Professional Pet Photography Masterclass',
-    date: 'Dec 20, 2026',
-    time: '1:00 PM EST',
-    type: 'Creative Workshop',
-  },
-  {
-    id: 3,
-    title: 'Regional Adoption Drive & Community Mixer',
-    date: 'Jan 05, 2027',
-    time: '6:30 PM EST',
-    type: 'Community Mixer',
+    id: 5,
+    question: 'What temperature is too cold for outdoor dog training?',
+    answersCount: 9,
+    bestAnswer: "Generally, temperatures below 45°F (7°C) start to feel uncomfortable for most short-haired breeds. Under 32°F (0°C), smaller dogs and seniors should not spend extended periods outside. Log your session temperatures in the app to track your dog's physical limits.",
+    askedBy: 'David T. • Chicago, IL',
   },
 ];
 
@@ -138,15 +120,15 @@ export default function CommunityHub() {
             transition={{ delay: 0.2 }}
             className="text-slate-500 text-lg font-medium"
           >
-            Coordinate care tips, join live veterinary webinars, and celebrate top contributors.
+            Coordinate care tips, review community discussions, and celebrate top contributors.
           </motion.p>
         </div>
 
-        {/* 3-Column Community Grid */}
+        {/* 2-Column Community Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* COLUMN 1: Q&A Accordion Matrix (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-5 text-left">
+          {/* COLUMN 1: Q&A Accordion Matrix (7 Cols) */}
+          <div className="lg:col-span-7 flex flex-col gap-5 text-left">
             <div className="flex items-center gap-2.5 mb-2">
               <MessageSquare className="w-5 h-5 text-emerald-500" />
               <h3 className="text-xl font-black text-slate-900">Recent Q&A Board</h3>
@@ -200,36 +182,8 @@ export default function CommunityHub() {
             </div>
           </div>
 
-          {/* COLUMN 2: Digital Events Ledger (3 Cols) */}
-          <div className="lg:col-span-3 flex flex-col gap-5 text-left">
-            <div className="flex items-center gap-2.5 mb-2">
-              <Calendar className="w-5 h-5 text-emerald-500" />
-              <h3 className="text-xl font-black text-slate-900">Upcoming Events</h3>
-            </div>
-
-            <div className="space-y-4">
-              {EVENTS_DATA.map((event) => (
-                <div
-                  key={event.id}
-                  className="p-4 rounded-2xl border border-slate-200 bg-white hover:border-emerald-500/20 hover:shadow-md transition flex flex-col gap-2 relative overflow-hidden shadow-sm"
-                >
-                  {/* Top Shimmer line */}
-                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
-                  
-                  <span className="text-[9px] text-emerald-600 font-extrabold uppercase tracking-widest">{event.type}</span>
-                  <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{event.title}</h4>
-                  
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2 font-black uppercase tracking-wider">
-                    <span>{event.date}</span>
-                    <span>{event.time}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* COLUMN 3: Weekly Champion & Leaderboard (4 Cols) */}
-          <div className="lg:col-span-4 flex flex-col gap-5 text-left">
+          {/* COLUMN 2: Weekly Champion & Leaderboard (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-5 text-left">
             
             {/* Pet of the Week Spotlight Frame */}
             <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm p-5 flex flex-col gap-4 relative">
@@ -293,3 +247,4 @@ export default function CommunityHub() {
     </section>
   );
 }
+

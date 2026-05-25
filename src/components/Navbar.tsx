@@ -49,12 +49,9 @@ export default function Navbar() {
                 alt="Pet Horizon Logo"
                 className="h-10 w-auto object-contain rounded-full bg-emerald-500/10 p-0.5 border border-emerald-500/20"
               />
-              <span className={`tracking-wide transition-all duration-300 bg-gradient-to-r bg-clip-text text-transparent ${
-                isScrolled
-                  ? 'from-emerald-600 via-emerald-500 to-teal-500'
-                  : 'from-slate-900 via-slate-800 to-emerald-600'
-              }`}>
-                Pet Horizon
+              <span className="flex items-center text-2xl font-black tracking-tight text-slate-900 select-none">
+                Pet<span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent font-extrabold">Horizon</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-1 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
               </span>
             </a>
 

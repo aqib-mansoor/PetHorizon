@@ -169,7 +169,7 @@ export default function GallerySection() {
         </div>{/* end section heading row */}
 
         {/* High-Performance Staggered Masonry Grid Canvas Layout */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div className="columns-2 sm:columns-3 lg:columns-4 gap-6 space-y-6 [column-fill:_balance]">
           {gallery.map((item, idx) => {
             const isLiked = parentHearts[item.id];
             return (
@@ -180,7 +180,7 @@ export default function GallerySection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
                 onClick={() => setLightboxIndex(idx)}
-                className="break-inside-avoid relative rounded-3xl overflow-hidden cursor-pointer group border border-slate-100 bg-slate-50 shadow-sm flex flex-col transition-all duration-300 hover:shadow-md hover:border-emerald-500/20"
+                className="break-inside-avoid relative rounded-3xl overflow-hidden cursor-pointer group border border-slate-100 bg-slate-50 shadow-sm flex flex-col transition-all duration-300 hover:shadow-md hover:border-emerald-500/20 mb-6"
               >
                 {/* Image element with responsive pulse fallback */}
                 <div className="w-full relative overflow-hidden bg-slate-100 rounded-t-3xl">

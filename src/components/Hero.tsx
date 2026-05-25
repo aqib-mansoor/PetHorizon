@@ -142,13 +142,13 @@ export default function Hero() {
 
 
           {/* RIGHT COLUMN: App Showcase Viewport Mockup & Retriever */}
-          <div ref={rightColRef} className="lg:col-span-5 relative flex items-center justify-center min-h-[480px] sm:min-h-[580px]">
+          <div ref={rightColRef} className="lg:col-span-5 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[580px] mt-8 lg:mt-0">
             
             {/* Background floating Retriever Card Portrait */}
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute w-[280px] sm:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-0 right-4 sm:right-10 top-4 filter contrast-105"
+              className="absolute w-[240px] sm:w-[320px] lg:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-0 right-2 sm:right-6 lg:right-10 top-4 filter contrast-105"
             >
               <img
                 src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg"
@@ -174,7 +174,7 @@ export default function Hero() {
               animate={{ y: [12, 0, 12] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               whileHover={{ rotateY: 10, rotateX: 5, scale: 1.03 }}
-              className="relative w-[230px] sm:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.15)] z-10 left-[-40px] sm:left-[-80px] bottom-[-40px] sm:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
+              className="relative w-[190px] sm:w-[240px] lg:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.15)] z-10 left-[-30px] sm:left-[-50px] lg:left-[-80px] bottom-[-20px] sm:bottom-[-40px] lg:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
               style={{ perspective: 1000 }}
             >
               {/* Notch */}

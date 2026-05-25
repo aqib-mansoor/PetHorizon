@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Lock, CheckCircle, Share2, Compass } from 'lucide-react';
+import { Award, Lock, CheckCircle, Share2 } from 'lucide-react';
 
 interface Badge {
   id: number;
@@ -8,52 +8,36 @@ interface Badge {
   desc: string;
   status: 'Unlocked' | 'Locked';
   percent: number;
-  rarity: string;
+  rarity: 'Common' | 'Rare' | 'Epic' | 'Legendary';
 }
 
 const BADGES_DATA: Badge[] = [
   {
     id: 1,
-    title: 'Early Riser',
-    desc: 'Logged outdoor walking sessions prior to 7:00 AM.',
+    title: 'Longevity Master',
+    desc: 'Maintained optimal diagnostic feeds for 90 days straight.',
     status: 'Unlocked',
     percent: 100,
-    rarity: 'Common',
-  },
-  {
-    id: 2,
-    title: 'Medication Master',
-    desc: 'Unbroken 30-day streak of medication log compliance.',
-    status: 'Locked',
-    percent: 64,
     rarity: 'Legendary',
   },
   {
-    id: 3,
-    title: 'Photo Pro',
-    desc: 'Contributed 50+ memory items to the cloud photo journal.',
+    id: 2,
+    title: 'Precision Tracker',
+    desc: 'Logged medical indices and custom updates perfectly.',
     status: 'Unlocked',
     percent: 100,
     rarity: 'Rare',
   },
   {
-    id: 4,
-    title: 'Budget Hero',
-    desc: 'Saved over $500 in programmatic expense optimization tracking.',
+    id: 3,
+    title: 'Social Butterfly',
+    desc: 'Completed 5 companion socialization block activities.',
     status: 'Locked',
-    percent: 30,
-    rarity: 'Epic',
-  },
-  {
-    id: 5,
-    title: 'Family Captain',
-    desc: 'Bound 3 independent caretakers to a unified family hub profile.',
-    status: 'Unlocked',
-    percent: 100,
+    percent: 40,
     rarity: 'Common',
   },
   {
-    id: 6,
+    id: 4,
     title: 'Vet VIP',
     desc: 'Completed 5 bi-annual general checkups with exported history records.',
     status: 'Locked',
@@ -63,7 +47,7 @@ const BADGES_DATA: Badge[] = [
 ];
 
 export default function Badges() {
-  const [badges, setBadges] = useState<Badge[]>(BADGES_DATA);
+  const [badges] = useState<Badge[]>(BADGES_DATA);
   const [showToast, setShowToast] = useState(false);
   const [activeBadgeTitle, setActiveBadgeTitle] = useState('');
 

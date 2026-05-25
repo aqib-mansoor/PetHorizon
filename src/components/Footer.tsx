@@ -161,40 +161,36 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[140px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative" style={{ zIndex: 1 }}>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative animate-fade-in" style={{ zIndex: 1 }}>
 
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(229,231,235,0.8)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(229,231,235,0.6)' }}>
 
-          {/* Column 1: Brand Info */}
+          {/* Column 1: Brand Info (4 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-5 text-left"
+            className="sm:col-span-2 md:col-span-4 text-left"
           >
             <div className="flex items-center gap-3 text-xl font-bold mb-6">
               <div
-                className="rounded-full p-1"
-                style={{
-                  background: 'rgba(255,255,255,1)',
-                  border: '1px solid rgba(229,231,235,1)',
-                  boxShadow: '0 4px 12px rgba(16,185,129,0.06)',
-                }}
+                className="rounded-full p-1 bg-white border border-slate-200 shadow-sm"
               >
                 <img
                   src={logoImg}
                   alt="Pet Horizon Logo"
-                  className="h-10 w-auto object-contain rounded-full"
+                  className="h-9 w-auto object-contain rounded-full"
                 />
               </div>
-              <span className="bg-gradient-to-r from-emerald-800 to-teal-600 bg-clip-text text-transparent tracking-wide font-black">
-                Pet Horizon
+              <span className="flex items-center text-xl font-black tracking-tight text-slate-900 select-none">
+                Pet<span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent font-extrabold">Horizon</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-1 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
               </span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
-              Your complete smart pet care companion platform. Manage health, schedules, meals, budgets, and capture memories in one beautiful dashboard.
+            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm font-medium">
+              Your complete veterinary-approved smart pet longevity assistant. Log medication regimens, track fitness, calculate budgets, and sync family care logs seamlessly.
             </p>
 
             {/* Social Links */}
@@ -227,24 +223,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer group"
-                  style={{
-                    background: 'rgba(243,244,246,1)',
-                    border: '1px solid rgba(229,231,235,1)',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(16,185,129,1)';
-                    e.currentTarget.style.borderColor = 'rgba(16,185,129,1)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(16,185,129,0.3)';
-                    e.currentTarget.style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(243,244,246,1)';
-                    e.currentTarget.style.borderColor = 'rgba(229,231,235,1)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.color = '';
-                  }}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer group bg-slate-100 border border-slate-200 transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/20"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill={social.noFill ? 'none' : 'currentColor'}>
                     {social.svg}
@@ -254,36 +233,29 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Platform Links (2 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="md:col-span-3 text-left"
+            className="md:col-span-2 text-left"
           >
-            <h3
-              className="text-sm font-black uppercase tracking-widest mb-7"
-              style={{ color: '#10b981' }}
-            >
-              Quick Navigation
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+              Platform
             </h3>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-3.5 text-sm font-semibold">
               {[
-                { label: 'Home', href: '#home' },
-                { label: 'About Us', href: '#about' },
+                { label: 'Home Dashboard', href: '#home' },
                 { label: 'Core Features', href: '#features' },
+                { label: 'Case Studies', href: '#transformations' },
                 { label: 'Pricing Plans', href: '#pricing' },
-                { label: 'Contact Support', href: '#contact' },
               ].map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
                   >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500 transition-all duration-300"
-                    />
                     {link.label}
                   </a>
                 </li>
@@ -291,63 +263,103 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Column 3: App Store Badges */}
+          {/* Column 3: Community Links (2 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="md:col-span-2 text-left"
+          >
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+              Community
+            </h3>
+            <ul className="space-y-3.5 text-sm font-semibold">
+              {[
+                { label: 'Community Hub', href: '#community' },
+                { label: 'Member Reviews', href: '#reviews' },
+                { label: 'Pet Photo Gallery', href: '#gallery' },
+                { label: 'Profile Badges', href: '#badges' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Column 4: Contact & Support (2 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-4 text-left"
+            className="md:col-span-2 text-left"
           >
-            <h3
-              className="text-sm font-black uppercase tracking-widest mb-7"
-              style={{ color: '#10b981' }}
-            >
-              Download Companion App
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+              Support
             </h3>
-            <div className="flex flex-col gap-3 max-w-[180px]">
+            <ul className="space-y-3.5 text-sm font-semibold">
+              {[
+                { label: 'Get in Touch', href: '#contact' },
+                { label: 'Help Center', href: '#contact' },
+                { label: 'Telemetry API', href: '#home' },
+                { label: 'Status Monitor', href: '#home' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Column 5: Apps (2 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="md:col-span-2 text-left"
+          >
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+              Apps
+            </h3>
+            <div className="flex flex-col gap-2.5 max-w-[140px]">
               {[
                 {
-                  href: 'https://apps.apple.com/us/app/rover-dog-boarding-walking/id547328133',
+                  href: 'https://apps.apple.com',
                   img: appStoreImg,
                   alt: 'Download on the App Store',
                 },
                 {
-                  href: 'https://play.google.com/store/apps/details?id=com.rover.android',
+                  href: 'https://play.google.com',
                   img: googlePlayImg,
                   alt: 'Get it on Google Play',
                 },
                 {
-                  href: 'https://play.google.com/store/apps/details?id=com.rover.android',
+                  href: 'https://play.google.com',
                   img: appAndroidImg,
                   alt: 'Download for Android',
                 },
-              ].map((badge) => (
+              ].map((badge, index) => (
                 <a
-                  key={badge.alt}
+                  key={index}
                   href={badge.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-2xl p-2.5 block cursor-pointer group"
-                  style={{
-                    background: 'rgba(243,244,246,1)',
-                    border: '1px solid rgba(229,231,235,1)',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(16,185,129,0.4)';
-                    e.currentTarget.style.background = 'rgba(16,185,129,0.06)';
-                    e.currentTarget.style.boxShadow = '0 6px 18px rgba(16,185,129,0.08)';
-                    e.currentTarget.style.transform = 'scale(1.03)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(229,231,235,1)';
-                    e.currentTarget.style.background = 'rgba(243,244,246,1)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
+                  className="rounded-xl p-2 block cursor-pointer group bg-slate-100 border border-slate-200 transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-50/50 hover:shadow-sm hover:scale-[1.02]"
                 >
-                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 opacity-85 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
               ))}
             </div>
@@ -363,11 +375,11 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4"
         >
-          <p>Pet Horizon © 2026 | Smart Pet Care Platform 🐾</p>
-          <div className="flex items-center gap-1.5">
+          <p className="font-medium">Pet Horizon © 2026 | All Rights Reserved 🐾</p>
+          <div className="flex items-center gap-1.5 font-medium">
             <span>Made with</span>
             <Heart className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 animate-pulse" />
-            <span>for pet owners worldwide.</span>
+            <span>for pet parents worldwide.</span>
           </div>
         </motion.div>
 
