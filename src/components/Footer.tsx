@@ -247,9 +247,9 @@ export default function Footer() {
             <ul className="space-y-3.5 text-sm font-semibold">
               {[
                 { label: 'Home Dashboard', href: '#home' },
-                { label: 'Core Features', href: '#features' },
+                { label: 'Feature Matrix', href: '#comparison' },
                 { label: 'Case Studies', href: '#transformations' },
-                { label: 'Pricing Plans', href: '#pricing' },
+                { label: 'Profile Badges', href: '#badges' },
               ].map((link) => (
                 <li key={link.label}>
                   <a

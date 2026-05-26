@@ -81,7 +81,7 @@ export default function Hero() {
               <motion.a
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 25px rgba(16,185,129,0.3)' }}
                 whileTap={{ scale: 0.95 }}
-                href="#pricing"
+                href="#contact"
                 className="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-8 py-4 rounded-2xl flex items-center gap-2 group transition-all duration-300 relative overflow-hidden shadow-lg shadow-emerald-500/20"
               >
                 <span>Get Started Free</span>
@@ -92,7 +92,7 @@ export default function Hero() {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="#features"
+                href="#comparison"
                 className="border-2 border-slate-200 hover:border-emerald-500/40 text-slate-800 bg-slate-50/80 hover:bg-slate-100 px-8 py-3.5 rounded-2xl font-bold transition-all duration-300"
               >
                 Explore Features
@@ -147,7 +147,7 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="hidden sm:block absolute w-[320px] lg:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-0 sm:right-6 lg:right-10 top-4 filter contrast-105"
+              className="hidden sm:block absolute w-[320px] lg:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-20 sm:-right-8 lg:-right-16 top-4 filter contrast-105"
             >
               <img
                 src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg"
@@ -173,7 +173,7 @@ export default function Hero() {
               animate={{ y: [12, 0, 12] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               whileHover={{ rotateY: 10, rotateX: 5, scale: 1.03 }}
-              className="relative w-[240px] sm:w-[240px] lg:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.12)] z-10 left-0 sm:left-[-50px] lg:left-[-80px] bottom-0 sm:bottom-[-40px] lg:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
+              className="relative w-[240px] sm:w-[240px] lg:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.12)] z-10 left-0 sm:left-[-80px] lg:left-[-120px] bottom-0 sm:bottom-[-40px] lg:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
               style={{ perspective: 1000 }}
             >
               {/* Notch */}
