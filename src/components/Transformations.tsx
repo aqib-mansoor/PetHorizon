@@ -23,7 +23,7 @@ const CASE_STUDIES: CaseStudy[] = [
     problem: 'Excess weight (32 lbs), joint stiffness, and lethargy.',
     solution: 'Lost 5 lbs of excess weight within 90 days via a tailored walking cadence and caloric tracking metrics.',
     detailedText: "Bella's veterinarian warned that joint issues would escalate without weight loss. Using Pet Horizon, we programmatically restricted her caloric food logs to 380kcal/day and logged three 20-minute walk sessions daily. Her agility recovered completely, and her veterinary diagnostics are now perfect.",
-    beforeUrl: 'https://images.unsplash.com/photo-1612536057832-2ff7ead58194?auto=format&fit=crop&q=80&w=600',
+    beforeUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=600&sat=-60&blur=8&bri=-15',
     afterUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=600',
     metrics: 'Lost 5 lbs (-15.6%) | Joint Pain: Zero',
     vetName: 'Dr. Arthur Mitchell, DVM',
@@ -35,7 +35,7 @@ const CASE_STUDIES: CaseStudy[] = [
     problem: 'Chronic lethargy, high glucose spikes, and diabetic alarms.',
     solution: 'Reverted severe chronic lethargy and blood glucose instability via programmatic insulin alarms.',
     detailedText: "Charlie suffered from diabetes, requiring twice-daily insulin injections exactly 12 hours apart. With Pet Horizon's shared family hubs, his owners set programmatic alerts and medicine minimum stock limits to ensure they never ran out of insulin. The activity timeline logs also helped maintain a consistent blood glucose plateau.",
-    beforeUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=600',
+    beforeUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=600&sat=-60&blur=8&bri=-15',
     afterUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&q=80&w=600',
     metrics: 'Glucose Deviation: -40% | Walk Rate: +80%',
     vetName: 'Dr. Linda Ross, DVM',
@@ -47,7 +47,7 @@ const CASE_STUDIES: CaseStudy[] = [
     problem: 'Severe over-grooming stress, social anxiety, and patch baldness.',
     solution: 'Overcame severe grooming stress and social isolation anxiety through structured behavioral tracking.',
     detailedText: "Luna began self-mutilating and over-grooming due to separation anxiety. Her owners used Pet Horizon's Journal and Activity Timeline to track daily anxiety triggers, feeding habits, and play. Programmatic grooming reminders allowed the family to target brushing sessions with calming triggers, leading to full hair regrowth.",
-    beforeUrl: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=600',
+    beforeUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600&sat=-60&blur=8&bri=-15',
     afterUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600',
     metrics: 'Anxiety Episodes: Zero | Fur Regrowth: 100%',
     vetName: 'Dr. Samuel Vance, Feline Behaviorist',
@@ -275,20 +275,20 @@ function CompareSlider({ beforeUrl, afterUrl }: { beforeUrl: string; afterUrl: s
       onClick={(e) => handleMove(e.clientX)}
       className="relative w-full h-full cursor-ew-resize select-none overflow-hidden"
     >
-      {/* Before Image (Background Layer) */}
+      {/* Before Image (Clipped Overlay Layer on the Left) */}
       <img
-        src={beforeUrl}
-        alt="Before recovery"
+        src={afterUrl}
+        alt="After recovery"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
       <div className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-lg bg-black/60 text-white text-[10px] font-black uppercase tracking-widest border border-white/10">
         Before
       </div>
 
-      {/* After Image (Clipped Overlay Layer) */}
+      {/* After Image (Background Layer on the Right) */}
       <img
-        src={afterUrl}
-        alt="After recovery"
+        src={beforeUrl}
+        alt="Before recovery"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{
           clipPath: `polygon(0 0, ${sliderVal}% 0, ${sliderVal}% 100%, 0 100%)`,

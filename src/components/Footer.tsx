@@ -143,7 +143,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="bg-section-light text-gray-600 pt-24 pb-12 relative overflow-hidden"
+      className="bg-slate-950 text-slate-400 pt-24 pb-12 relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
       <FooterBackground containerRef={footerRef} />
@@ -153,18 +153,18 @@ export default function Footer() {
         className="absolute top-0 left-0 right-0 h-[1.5px]"
         style={{
           background: 'linear-gradient(90deg, transparent, #10b981, #34d399, #10b981, transparent)',
-          opacity: 0.5,
+          opacity: 0.6,
         }}
       />
 
       {/* CSS Glow Effects */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[140px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-teal-500/10 blur-[120px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 relative animate-fade-in" style={{ zIndex: 1 }}>
 
         {/* Top Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-16 mb-12" style={{ borderBottom: '1px solid rgba(229,231,235,0.6)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-16 mb-12 border-b border-slate-800/80">
 
           {/* Column 1: Brand Info (4 Cols) */}
           <motion.div
@@ -184,12 +184,12 @@ export default function Footer() {
                   className="h-9 w-auto object-contain rounded-full"
                 />
               </div>
-              <span className="flex items-center text-xl font-black tracking-tight text-slate-900 select-none">
-                Pet<span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent font-extrabold">Horizon</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-1 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+              <span className="flex items-center text-xl font-black tracking-tight text-white select-none">
+                Pet<span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent font-extrabold">Horizon</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               </span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm font-medium">
+            <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm font-medium">
               Your complete veterinary-approved smart pet longevity assistant. Log medication regimens, track fitness, calculate budgets, and sync family care logs seamlessly.
             </p>
 
@@ -223,7 +223,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 cursor-pointer group bg-slate-100 border border-slate-200 transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/20"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-slate-400 cursor-pointer group bg-slate-900 border border-slate-800 transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/20"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill={social.noFill ? 'none' : 'currentColor'}>
                     {social.svg}
@@ -241,7 +241,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="md:col-span-2 text-left"
           >
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-6">
               Platform
             </h3>
             <ul className="space-y-3.5 text-sm font-semibold">
@@ -254,7 +254,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
+                    className="text-slate-400 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-2"
                   >
                     {link.label}
                   </a>
@@ -271,7 +271,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="md:col-span-2 text-left"
           >
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-6">
               Community
             </h3>
             <ul className="space-y-3.5 text-sm font-semibold">
@@ -284,7 +284,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
+                    className="text-slate-400 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-2"
                   >
                     {link.label}
                   </a>
@@ -301,7 +301,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-2 text-left"
           >
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-6">
               Support
             </h3>
             <ul className="space-y-3.5 text-sm font-semibold">
@@ -314,7 +314,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-500 hover:text-emerald-600 transition-colors duration-200 flex items-center gap-2"
+                    className="text-slate-400 hover:text-emerald-400 transition-colors duration-200 flex items-center gap-2"
                   >
                     {link.label}
                   </a>
@@ -331,7 +331,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="md:col-span-2 text-left"
           >
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-6">
               Apps
             </h3>
             <div className="flex flex-col gap-2.5 max-w-[140px]">
@@ -357,9 +357,9 @@ export default function Footer() {
                   href={badge.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-xl p-2 block cursor-pointer group bg-slate-100 border border-slate-200 transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-50/50 hover:shadow-sm hover:scale-[1.02]"
+                  className="rounded-xl p-2 block cursor-pointer group bg-slate-900 border border-slate-800 transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-950/20 hover:shadow-sm hover:scale-[1.02]"
                 >
-                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={badge.img} alt={badge.alt} className="w-full h-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
               ))}
             </div>
@@ -373,7 +373,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4"
+          className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4"
         >
           <p className="font-medium">Pet Horizon © 2026 | All Rights Reserved</p>
           <div className="flex items-center gap-1.5 font-medium">
