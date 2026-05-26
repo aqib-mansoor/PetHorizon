@@ -60,7 +60,7 @@ export default function Hero() {
             {/* Active App Live Badge */}
             <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit mx-0 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
-              <span className="text-xs font-bold uppercase tracking-wider">Powered by Node.js & MongoDB</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Available on iOS & Android</span>
             </div>
 
             {/* Premium Typography Headline */}
