@@ -60,7 +60,7 @@ export default function Hero() {
             {/* Active App Live Badge */}
             <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit mx-0 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
-              <span className="text-xs font-bold uppercase tracking-wider">Version 2.0 Now Live on iOS & Android</span>
+              <span className="text-xs font-bold uppercase tracking-wider">Powered by Node.js & MongoDB</span>
             </div>
 
             {/* Premium Typography Headline */}
@@ -73,7 +73,7 @@ export default function Hero() {
 
             {/* Authoritative Subheadline */}
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-medium">
-              Manage specialized medication regimens, log daily health markers, coordinate shared family pet-sitting tasks, and optimize nutrition tracking with a clinical, veterinarian-approved tracking engine built directly into your pocket.
+              Manage custom medicine regimens with stock alerts, log daily health markers on your activity timeline, coordinate shared premium family hubs, and track your pet's budget. Everything you need to manage your pet's life, in one place.
             </p>
 
             {/* Interactive Asymmetric CTA Block */}
@@ -217,13 +217,13 @@ export default function Hero() {
 
                 {/* Daily Static Metrics Checklist */}
                 <div className="flex flex-col gap-2">
-                  <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Daily Schedule</p>
+                  <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Timeline Activity</p>
                   
                   {/* Row item 1 */}
                   <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                     <div className="text-[11px] text-slate-700">
-                      <p className="font-bold">Caloric Meal</p>
+                      <p className="font-bold">Feeding</p>
                       <p className="text-[9px] text-slate-400">08:00 AM • Completed</p>
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export default function Hero() {
                   <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-100">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                     <div className="text-[11px] text-slate-700">
-                      <p className="font-bold">Medicine Pill</p>
+                      <p className="font-bold">Medicine</p>
                       <p className="text-[9px] text-slate-400">12:00 PM • Completed</p>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ export default function Hero() {
                   <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50/50 border border-slate-100/50 opacity-60">
                     <div className="w-4 h-4 rounded-full border-2 border-slate-300 flex-shrink-0" />
                     <div className="text-[11px] text-slate-600">
-                      <p className="font-bold">Outdoor Run</p>
+                      <p className="font-bold">Dog Walking</p>
                       <p className="text-[9px] text-slate-400">06:30 PM • Scheduled</p>
                     </div>
                   </div>
@@ -254,8 +254,8 @@ export default function Hero() {
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
                   <div className="text-[10px]">
-                    <p className="font-extrabold text-emerald-800">Medication Alarm Alert</p>
-                    <p className="text-slate-500 font-semibold">Glucose Check in 15m</p>
+                    <p className="font-extrabold text-emerald-800">Low Stock Alert</p>
+                    <p className="text-slate-500 font-semibold">Medicine under minimum limit</p>
                   </div>
                 </div>
 

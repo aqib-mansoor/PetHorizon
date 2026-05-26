@@ -20,16 +20,16 @@ interface Contributor {
 const QA_DATA: QAItem[] = [
   {
     id: 1,
-    question: 'How many daily miles are recommended for an 18-month Husky?',
+    question: 'How do I invite a family member or pet sitter?',
     answersCount: 5,
-    bestAnswer: 'For an 18-month Siberian Husky, veterinarians generally recommend 3 to 5 miles of structured cardiovascular activity daily, split into morning and evening walks. Keep logs consistent using Pet Horizon to avoid over-exertion during high temperatures.',
+    bestAnswer: 'You can generate an invite link or a QR code directly from the Family Hub. When they accept the invite via the deep link, they will be added to your pet’s care team instantly.',
     askedBy: 'Marcus H. • Portland, OR',
   },
   {
     id: 2,
-    question: 'Safest grain-free wet diets for senior cats with renal concerns?',
+    question: 'Can I restrict what my pet sitter can see or edit?',
     answersCount: 12,
-    bestAnswer: 'Always consult your vet first, but renal-safe diets require low phosphorus levels. Look for wet diets specifically formulated for kidney health. Logging water consumption and tracking urinalysis markers in Pet Horizon helps prevent dehydration crises.',
+    bestAnswer: 'Yes! The permissions system allows you to assign "admin", "edit", or "readonly" access. For example, a pet sitter can be set to readonly so they can view the feeding schedule but cannot modify the budget.',
     askedBy: 'Clara D. • Seattle, WA',
   },
   {
@@ -110,7 +110,7 @@ export default function CommunityHub() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl font-black text-slate-900 mt-6 mb-4"
           >
-            Specialized Community Hub
+            Specialized Family Hubs
           </motion.h2>
 
           <motion.p
@@ -120,7 +120,7 @@ export default function CommunityHub() {
             transition={{ delay: 0.2 }}
             className="text-slate-500 text-lg font-medium"
           >
-            Coordinate care tips, review community discussions, and celebrate top contributors.
+            Invite family members via QR codes, assign role permissions, and coordinate pet care seamlessly.
           </motion.p>
         </div>
 
@@ -131,7 +131,7 @@ export default function CommunityHub() {
           <div className="lg:col-span-7 flex flex-col gap-5 text-left">
             <div className="flex items-center gap-2.5 mb-2">
               <MessageSquare className="w-5 h-5 text-emerald-500" />
-              <h3 className="text-xl font-black text-slate-900">Recent Q&A Board</h3>
+              <h3 className="text-xl font-black text-slate-900">Family Hub FAQs</h3>
             </div>
 
             <div className="space-y-4">

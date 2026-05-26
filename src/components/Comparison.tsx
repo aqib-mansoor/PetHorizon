@@ -18,17 +18,17 @@ const COMPARISON_ROWS: Row[] = [
     traditional: 'Separate Notebooks',
   },
   {
-    feature: 'Real-time Family Care Sharing',
-    desc: 'Invite pet sitters, co-owners, or veterinarians with unique permissions.',
+    feature: 'Real-time Family Hub & Invites',
+    desc: 'Create family hubs, invite sitters via QR or Link with role permissions.',
     premium: true,
     free: false,
     traditional: 'Manual SMS / Calls',
   },
   {
-    feature: 'Precision Medication Push Notifications',
-    desc: 'Custom schedules, sound alerts, and recurring push indicators.',
+    feature: 'Medicine Stock & Advanced Schedules',
+    desc: 'Track medicine minimum stock limits, push alerts, and dog walking schedules.',
     premium: true,
-    free: 'Basic Timers',
+    free: 'Basic Scheduling',
     traditional: 'Paper Checklists',
   },
   {
@@ -136,7 +136,6 @@ export default function Comparison() {
                   </tr>
                 ))}
 
-                {/* Final Subscription Costs Row */}
                 <tr className="bg-slate-50/50">
                   <td className="p-6">
                     <p className="font-black text-slate-900">Subscription Cost</p>
@@ -148,10 +147,11 @@ export default function Comparison() {
                   <td className="p-6 text-center text-xs text-slate-400 uppercase tracking-wider font-extrabold">
                     $0 / Forever
                   </td>
-                  <td className="p-6 text-center bg-emerald-50/55 border-l border-emerald-150 text-emerald-800 font-black">
+                  <td className="p-6 text-center bg-emerald-50/55 border-l border-emerald-150 text-emerald-800 font-black flex flex-col gap-1 items-center">
                     <span className="text-base uppercase tracking-widest text-emerald-700">
                       $4.99 / Mo
                     </span>
+                    <span className="text-[10px] text-emerald-600 font-semibold">$49.99 / Yr • Family Hub: $9.99</span>
                   </td>
                 </tr>
               </tbody>
