@@ -64,7 +64,7 @@ export default function Comparison() {
             Feature Matrix
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mt-6 mb-4">
-            Redefining the Care Standard ⚡
+            Redefining the Care Standard
           </h2>
           <p className="text-slate-500 text-lg font-medium">
             A comprehensive look at our features compared to traditional care and free options.

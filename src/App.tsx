@@ -24,10 +24,7 @@ export default function App() {
       {/* Hero Section */}
       <Hero />
 
-      {/* User Reviews & Testimonials */}
-      <UserReviews />
-
-      {/* Community Photo Gallery */}
+       {/* Community Photo Gallery */}
       <GallerySection />
 
       {/* Pet Health Transformation Case Studies */}
@@ -38,6 +35,9 @@ export default function App() {
 
       {/* Gamification & Achievement Badges */}
       <Badges />
+
+      {/* User Reviews & Testimonials */}
+      <UserReviews />
 
       {/* Contact Us Form */}
       <ContactUs />

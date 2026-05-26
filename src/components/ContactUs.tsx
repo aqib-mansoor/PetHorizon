@@ -35,7 +35,7 @@ export default function ContactUs() {
             Get in Touch
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mt-6 mb-4">
-            We'd Love to Hear From You ✉️
+            We'd Love to Hear From You
           </h2>
           <p className="text-slate-500 text-lg font-medium">
             Have questions about Pet Horizon or need assistance? Reach out today.
@@ -212,7 +212,7 @@ export default function ContactUs() {
                     </div>
 
                     <div>
-                      <h4 className="text-2xl font-black text-slate-900">Message Sent! 🎉</h4>
+                      <h4 className="text-2xl font-black text-slate-900">Message Sent!</h4>
                       <p className="text-slate-500 text-sm mt-1.5 leading-relaxed max-w-sm mx-auto font-medium">
                         Thank you, <span className="text-emerald-600 font-extrabold">{formData.name}</span>. We have received your inquiry regarding <span className="text-slate-800 font-extrabold">{formData.subject}</span> and will get back to you shortly.
                       </p>

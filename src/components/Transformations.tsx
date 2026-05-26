@@ -87,8 +87,7 @@ export default function Transformations() {
             Real Pet Health{' '}
             <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
               Transformations
-            </span>{' '}
-            ❤️
+            </span>
           </motion.h2>
 
           <motion.p
@@ -134,7 +133,7 @@ export default function Transformations() {
 
                 {/* Health Metrics Indicator */}
                 <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 text-emerald-700 font-extrabold text-xs">
-                  📈 Result: {study.metrics}
+                  Result: {study.metrics}
                 </div>
 
                 <div className="text-xs flex flex-col gap-2">

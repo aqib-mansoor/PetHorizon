@@ -244,7 +244,7 @@ export default function UserReviews() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl font-black text-slate-900 mt-6 mb-4"
           >
-            Loved by 10,000+ Pet Parents 🐾
+            Loved by 10,000+ Pet Parents
           </motion.h2>
           
           <motion.p
@@ -386,11 +386,11 @@ export default function UserReviews() {
               </div>
 
               <form onSubmit={handleCreateReview} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Name</label>
                     <input
-                      type="text"
+                       type="text"
                       value={newReview.name}
                       onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
                       placeholder="e.g. Sarah J."
@@ -410,7 +410,7 @@ export default function UserReviews() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Pet Name</label>
                     <input
@@ -473,7 +473,7 @@ export default function UserReviews() {
                   type="submit"
                   className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-4 rounded-xl shadow-lg shadow-emerald-500/20 uppercase tracking-widest text-xs transition cursor-pointer"
                 >
-                  Submit Parent Review ✅
+                  Submit Parent Review
                 </button>
               </form>
             </motion.div>
@@ -490,7 +490,7 @@ export default function UserReviews() {
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             className="fixed bottom-6 right-6 z-55 bg-emerald-500 text-white font-black px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 border border-emerald-400"
           >
-            <span className="text-xl">🎉</span>
+            <span className="text-xl">&#10003;</span>
             <div>
               <p className="text-sm">Review Submitted Successfully!</p>
               <p className="text-[10px] text-emerald-100 font-medium">Thank you for sharing your experience!</p>

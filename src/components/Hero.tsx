@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { Sparkles, Star, ShieldCheck, CheckCircle2, Award } from 'lucide-react';
+import { Star, ShieldCheck, CheckCircle2, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import appStoreImg from '../assets/app-store.svg';
 import googlePlayImg from '../assets/google-play.svg';
@@ -55,12 +55,12 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* LEFT COLUMN: Premium High-Conversion Copy & Actions */}
-          <div ref={leftColRef} className="lg:col-span-7 text-center sm:text-left flex flex-col gap-6">
+          <div ref={leftColRef} className="lg:col-span-7 text-left flex flex-col gap-6">
             
             {/* Active App Live Badge */}
-            <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit mx-auto sm:mx-0 shadow-sm">
-              <Sparkles className="w-4 h-4 text-emerald-600 animate-spin" style={{ animationDuration: '3s' }} />
-              <span className="text-xs font-bold uppercase tracking-wider">Version 2.0 Now Live on iOS & Android 🚀</span>
+            <div className="inline-flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-2 rounded-full w-fit mx-0 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+              <span className="text-xs font-bold uppercase tracking-wider">Version 2.0 Now Live on iOS & Android</span>
             </div>
 
             {/* Premium Typography Headline */}
@@ -77,7 +77,7 @@ export default function Hero() {
             </p>
 
             {/* Interactive Asymmetric CTA Block */}
-            <div className="flex flex-wrap items-center gap-4 mt-2">
+            <div className="flex flex-wrap items-center justify-start gap-4 mt-2">
               <motion.a
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 25px rgba(16,185,129,0.3)' }}
                 whileTap={{ scale: 0.95 }}
@@ -100,33 +100,32 @@ export default function Hero() {
             </div>{/* end CTA block */}
 
             {/* App Store Badges & Ratings Block */}
-            <div className="flex flex-wrap items-center gap-5 mt-4 pt-6 border-t border-slate-100">
-              <div className="flex items-center gap-3 bg-slate-900 rounded-2xl px-4 py-3 shadow-md">
+            <div className="flex flex-wrap items-center justify-start gap-5 mt-4 pt-6 border-t border-slate-100">
+              <div className="flex flex-wrap items-center justify-start gap-3">
                 <motion.a 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }} 
                   href="https://play.google.com/store/apps" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="flex items-center justify-center transition-all duration-200"
+                  className="bg-slate-900 rounded-2xl px-4 py-3 shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center"
                 >
-                  <img src={googlePlayImg} alt="Get it on Google Play" className="h-[44px] w-auto object-contain hover:opacity-90" />
+                  <img src={googlePlayImg} alt="Get it on Google Play" className="h-[40px] w-auto object-contain hover:opacity-90" />
                 </motion.a>
-                <div className="w-px h-8 bg-white/20" />
                 <motion.a 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }} 
                   href="https://apps.apple.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="flex items-center justify-center transition-all duration-200"
+                  className="bg-slate-900 rounded-2xl px-4 py-3 shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center"
                 >
-                  <img src={appStoreImg} alt="Download on the App Store" className="h-[44px] w-auto object-contain hover:opacity-90" />
+                  <img src={appStoreImg} alt="Download on the App Store" className="h-[40px] w-auto object-contain hover:opacity-90" />
                 </motion.a>
               </div>
 
               <div className="flex flex-col text-left justify-center">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-start gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
@@ -142,13 +141,13 @@ export default function Hero() {
 
 
           {/* RIGHT COLUMN: App Showcase Viewport Mockup & Retriever */}
-          <div ref={rightColRef} className="lg:col-span-5 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[580px] mt-8 lg:mt-0">
+          <div ref={rightColRef} className="lg:col-span-5 relative flex items-center justify-center min-h-[380px] sm:min-h-[500px] lg:min-h-[580px] mt-8 lg:mt-0 px-4 sm:px-0">
             
-            {/* Background floating Retriever Card Portrait */}
+            {/* Background floating Retriever Card Portrait - Hidden on mobile for cleaner focus */}
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute w-[240px] sm:w-[320px] lg:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-0 right-2 sm:right-6 lg:right-10 top-4 filter contrast-105"
+              className="hidden sm:block absolute w-[320px] lg:w-[360px] aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl z-0 sm:right-6 lg:right-10 top-4 filter contrast-105"
             >
               <img
                 src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg"
@@ -174,7 +173,7 @@ export default function Hero() {
               animate={{ y: [12, 0, 12] }}
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               whileHover={{ rotateY: 10, rotateX: 5, scale: 1.03 }}
-              className="relative w-[190px] sm:w-[240px] lg:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.15)] z-10 left-[-30px] sm:left-[-50px] lg:left-[-80px] bottom-[-20px] sm:bottom-[-40px] lg:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
+              className="relative w-[240px] sm:w-[240px] lg:w-[270px] bg-slate-50 rounded-[3rem] border-4 border-slate-200 shadow-[0_20px_50px_rgba(15,23,42,0.12)] z-10 left-0 sm:left-[-50px] lg:left-[-80px] bottom-0 sm:bottom-[-40px] lg:bottom-[-60px] overflow-hidden flex flex-col cursor-pointer transition-all duration-500"
               style={{ perspective: 1000 }}
             >
               {/* Notch */}
@@ -188,9 +187,16 @@ export default function Hero() {
                 
                 {/* Profile Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-black">Active Profile</p>
-                    <h3 className="font-extrabold text-sm text-slate-800">Max (Retriever)</h3>
+                  <div className="flex items-center gap-2">
+                    <img 
+                      src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg" 
+                      alt="Max Portrait" 
+                      className="w-8 h-8 rounded-full object-cover border border-emerald-500/20 shadow-sm" 
+                    />
+                    <div>
+                      <p className="text-[8px] text-slate-400 uppercase tracking-widest font-black leading-none">Active Profile</p>
+                      <h3 className="font-extrabold text-xs text-slate-800 mt-0.5">Max (Retriever)</h3>
+                    </div>
                   </div>
                   <div className="w-7 h-7 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center">
                     <ShieldCheck className="w-4 h-4 text-emerald-500" />

@@ -194,7 +194,7 @@ export default function Badges() {
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             className="fixed bottom-6 right-6 z-55 bg-emerald-500 text-white font-black px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2 border border-emerald-450 text-xs"
           >
-            <span>🎉 Badge progress link copied for "{activeBadgeTitle}"!</span>
+            <span>Badge progress link copied for "{activeBadgeTitle}"!</span>
           </motion.div>
         )}
       </AnimatePresence>

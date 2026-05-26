@@ -159,8 +159,7 @@ export default function GallerySection() {
               Pets Love{' '}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 Pet Horizon
-              </span>{' '}
-              🐕🐈
+              </span>
             </h2>
             <p className="text-slate-500 text-base mt-2 font-medium">
               Staggered moments shared by verified smart pet parents around the globe.
@@ -227,9 +226,9 @@ export default function GallerySection() {
                 </div>
 
                 {/* Bottom Permanent Metric Strip */}
-                <div className="flex items-center justify-between p-4 bg-slate-50 border-t border-slate-100 rounded-b-3xl">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{item.petName}</span>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-650 font-extrabold">
+                <div className="flex flex-col min-[380px]:flex-row justify-between min-[380px]:items-center p-3 sm:p-4 bg-slate-50 border-t border-slate-100 rounded-b-3xl gap-1.5 min-[380px]:gap-0">
+                  <span className="text-[10px] min-[380px]:text-xs font-bold text-slate-400 uppercase tracking-wider">{item.petName}</span>
+                  <div className="flex items-center gap-1.5 text-[10px] min-[380px]:text-xs text-slate-650 font-extrabold">
                     <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-emerald-500 text-emerald-500 animate-pulse' : 'text-slate-350'}`} />
                     <span>{item.defaultHearts} likes</span>
                   </div>

@@ -21,11 +21,12 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'Features', href: '#features' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Transformations', href: '#transformations' },
-    { name: 'Pricing', href: '#pricing' },
     { name: 'Community', href: '#community' },
+    { name: 'Badges', href: '#badges' },
     { name: 'Reviews', href: '#reviews' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -67,7 +68,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#pricing"
+                href="#community"
                 className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md shadow-emerald-500/10 hover:shadow-emerald-600/20 transition-all duration-200 hover:scale-[1.03] text-sm"
               >
                 Get Started
@@ -115,7 +116,7 @@ export default function Navbar() {
               ))}
               <div className="pt-2 px-1">
                 <a
-                  href="#pricing"
+                  href="#community"
                   onClick={() => setIsOpen(false)}
                   className="block text-center bg-emerald-500 hover:bg-emerald-600 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-emerald-500/25"
                 >

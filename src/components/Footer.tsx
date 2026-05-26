@@ -375,7 +375,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4"
         >
-          <p className="font-medium">Pet Horizon © 2026 | All Rights Reserved 🐾</p>
+          <p className="font-medium">Pet Horizon © 2026 | All Rights Reserved</p>
           <div className="flex items-center gap-1.5 font-medium">
             <span>Made with</span>
             <Heart className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 animate-pulse" />

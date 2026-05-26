@@ -190,7 +190,7 @@ export default function CommunityHub() {
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
 
               <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-amber-500 fill-amber-500 animate-bounce" />
+                <Trophy className="w-5 h-5 text-amber-500 fill-amber-500" />
                 <h3 className="text-lg font-black text-slate-900">Pet of the Week</h3>
               </div>
 
